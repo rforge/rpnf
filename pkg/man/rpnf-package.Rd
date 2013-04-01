@@ -3,10 +3,10 @@
 \alias{rpnf}
 \docType{package}
 \title{
-Point & Figure Library
+Point and Figure Library
 }
 \description{
-The R Point & Figure Library is a tool-set to create and analyze Point & Figure Charts for given time series or data frame objects.}
+The R Point and Figure Library is a tool-set to create and analyze Point and Figure Charts for given time series or data frame objects.}
 \details{
 \tabular{ll}{
 Package: \tab rpnf\cr
@@ -15,7 +15,6 @@ Version: \tab 0.0.1\cr
 Date: \tab 2013-03-31\cr
 License: \tab GPL-3\cr
 }
-~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
 Sascha M. Herrmann
@@ -30,22 +29,15 @@ Dorsey, Thomas. Sicher anlegen mit point & figure: klare Signale mit einfachen M
 }
 \keyword{ package }
 \seealso{
-#~~ Optional links to other man pages, e.g. ~~
-#~~ \code{\link[<quantmod>:<quantmod>-package]{<quantmod>}} ~~
 }
 \examples{
-## download some recent data with help of package quantmod
-# library("quantmod")  #Load the quantmod Library
-# stockData <- new.env() #Make a new environment for quantmod to store data in
-# getSymbols(c("^DJI"), env = stockData, src = "yahoo", from = as.Date(Sys.Date()-3*365), to = as.Date(Sys.Date())) #Download the stock history (for all tickers)
-# data <- OHLC(stockData$DJI) # retrieve data
+library(rpnf)
+data(GDAXI)
+# Determine PNF-Informations for a linear Chart with boxsize 100 points
+symbol.pnf <- pnfprocessor(high=GDAXI$High,low=GDAXI$Low,date=GDAXI$Date,boxsize=100,log=FALSE)  
+pnfplot(symbol.pnf,main="P&F Plot GDAXI (linear)")
 
-# library(rpnf)
-## Determine PNF-Informations for a linear Chart with boxsize 100 points
-# symbol.pnf <- pnfprocessor(high=data$DJI.High,low=data$DJI.Low,date=index(data),boxsize=100,log=FALSE)  
-# pnfplot(symbol.pnf,main="P&F Plot DJI (linear)")
-
-## Determine PNF-Informations for a linear Chart with boxsize 100 points
-# symbol.pnf <- pnfprocessor(high=data$DJI.High,low=data$DJI.Low,date=index(data),boxsize=getLogBoxsize(1),log=TRUE)  
-# pnfplot(symbol.pnf,main="P&F Plot DJI (log)")
+# Determine PNF-Informations for a linear Chart with boxsize 100 points
+symbol.pnf <- pnfprocessor(high=GDAXI$High,low=GDAXI$Low,date=GDAXI$Date,boxsize=getLogBoxsize(1),log=TRUE)  
+pnfplot(symbol.pnf,main="P&F Plot GDAXI (log)")
 }
