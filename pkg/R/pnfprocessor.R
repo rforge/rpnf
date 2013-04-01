@@ -208,8 +208,10 @@ pnfprocessor <- function(high,low=high,date=NULL,reversal=3, boxsize=1, log=FALS
           }
         } else if (doubleTop(data[data$date<=data$date[i],],data$column[i]-2)) {
           data$signal.bs[i] <- "TRIPLE TOP"
-          #         } else if (FALSE) {
-          #           data$signal.bs[i] <- "BEARISH SIGNAL REVERSED"
+        } else if ((fallingBottom(data[data$date<=data$date[i],],data$column[i]-1) &
+                      fallingTop(data[data$date<=data$date[i],],data$column[i]-2) &
+                      fallingBottom(data[data$date<=data$date[i],],data$column[i]-3))) {
+          data$signal.bs[i] <- "BEARISH SIGNAL REVERSED"
         } 
         # TODO low pole is a tricky one!!
         #       } else if (((data$column[i]>=4) & 
@@ -228,9 +230,26 @@ pnfprocessor <- function(high,low=high,date=NULL,reversal=3, boxsize=1, log=FALS
       if (fallingBottom(data[data$date<=data$date[i],],data$column[i])) {
         # we have at least DOUBLE BOTTOM
         data$signal.bs[i] <- "DOUBLE BOTTOM"
-        # TODO insert subsequent decision tree        
+        if (fallingTop(data[data$date<=data$date[i],],data$column[i]-1)) {
+          data$signal.bs[i] <- "BEARISH SIGNAL"
+          if (fallingBottom(data[data$date<=data$date[i],],data$column[i]-2)) {
+            data$signal.bs[i] <- "TRIPLE BEARISH SIGNAL"
+            if ((doubleTop(data[data$date<=data$date[i],],data$column[i]-3) &
+                   doubleBottom(data[data$date<=data$date[i],],data$column[i]-4))) {
+              data$signal.bs[i] <- "BEARISH CATAPULT"
+            }
+          } else if (raisingBottom(data[data$date<=data$date[i],],data$column[i]-2)) {
+            data$signal.bs[i] <- "BEARISH TRIANGLE"
+          }
+        } else if (doubleBottom(data[data$date<=data$date[i],],data$column[i]-2)) {
+          data$signal.bs[i] <- "TRIPLE BOTTOM"
+        } else if ((raisingTop(data[data$date<=data$date[i],],data$column[i]-1) & 
+                      raisingBottom(data[data$date<=data$date[i],],data$column[i]-2) &
+                      raisingTop(data[data$date<=data$date[i],],data$column[i]-3))) {
+          data$signal.bs[i] <- "BULLISH SIGNAL REVERSED"
+        }
       } else if (FALSE) {
-        # TODO insert condtions for HIGH POLE
+        # TODO insert condtions for HIGH POLE, this is a tricky one!!!
         data$signal.bs[i] <- "HIGH POLE"
       } else if (FALSE) {
         # TODO insert condtions for BULL TRAP
