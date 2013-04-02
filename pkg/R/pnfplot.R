@@ -1,3 +1,8 @@
+#' Generate a point and figure plot
+#' 
+#' @param data a data frame object containing point and figure informations to be plotted
+#' @param ... any additional options for the plot command
+#' @export
 pnfplot <- function(data,...) {
   # determine boundaries
   xlim <- c(min(data$date),max(data$date))

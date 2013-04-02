@@ -1,3 +1,15 @@
+#' Generate all point and figure informations for a given time series.
+#' 
+#' Please ensure that high, low and date are all order a
+#' 
+#' @param high a vector containing the high quotes
+#' @param low a (optional) vector containing the low quotes
+#' @param date a vector of dates the quotes belong
+#' @param reversal number of boxes needed to make a reversal 
+#' @param boxsize the boxsize to be used
+#' @param log should we do the calculations on a logarithmic scale
+#' @return returns a data table with all point and figure information in it
+#' @export
 pnfprocessor <- function(high,low=high,date=NULL,reversal=3, boxsize=1, log=FALSE) {
   result <- .xo.processor(high,low,date,reversal,boxsize,log)
   result2 <- .xo.signalprocessor(result,reversal)
