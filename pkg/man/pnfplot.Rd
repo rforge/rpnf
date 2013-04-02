@@ -1,6 +1,6 @@
 \name{pnfplot}
 \alias{pnfplot}
-\title{Generate a point and figure plot}
+\title{Generate a modern point and figure plot}
 \usage{
   pnfplot(data, ...)
 }
@@ -11,6 +11,6 @@
   \item{...}{any additional options for the plot command}
 }
 \description{
-  Generate a point and figure plot
+  Generate a modern point and figure plot
 }
 

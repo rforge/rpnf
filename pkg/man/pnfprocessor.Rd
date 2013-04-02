@@ -25,6 +25,7 @@
   information in it
 }
 \description{
-  Please ensure that high, low and date are all order a
+  Please ensure that high, low and date are all ordered
+  according to the Date column.
 }
 

@@ -7,7 +7,7 @@ This data set contains the high and low quotes for 2-years of historic quotes fo
 }
 \usage{data(GDAXI)}
 \format{
-  A data frame with 770 observations on the following 3 variables.
+  A data frame with 770 observations of highs and lows for the german DAX30 stock index from May 2010 until March 2013.
   \describe{
     \item{\code{Date}}{a Date vector}
     \item{\code{High}}{a numeric vector containing highest value per day}

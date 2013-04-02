@@ -19,5 +19,16 @@
 \examples{
 # return appropriate value for 1\% boxsize
 getLogBoxsize(percent=1)
+
+# apply it with pnfprocessor
+library(rpnf) # Load rpnf library
+data(GDAXI) # Load some example data
+
+pnfprocessor(
+ high=GDAXI$High,
+ low=GDAXI$Low,
+ date=GDAXI$Date,
+ boxsize=getLogBoxsize(percent=1),
+ log=TRUE)
 }
 

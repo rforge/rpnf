@@ -1,6 +1,6 @@
 #' Generate all point and figure informations for a given time series.
 #' 
-#' Please ensure that high, low and date are all order a
+#' Please ensure that high, low and date are all ordered according to the Date column.
 #' 
 #' @param high a vector containing the high quotes
 #' @param low a (optional) vector containing the low quotes
@@ -10,6 +10,15 @@
 #' @param log should we do the calculations on a logarithmic scale
 #' @return returns a data table with all point and figure information in it
 #' @export
+#' library(rpnf) # Load rpnf library
+#' data(GDAXI) # Load some example data
+#' pnfprocessor(
+#'   high=GDAXI$High,
+#'   low=GDAXI$Low,
+#'   date=GDAXI$Date,
+#'   boxsize=100,
+#'   log=FALSE)  
+#' 
 pnfprocessor <- function(high,low=high,date=NULL,reversal=3, boxsize=1, log=FALSE) {
   result <- .xo.processor(high,low,date,reversal,boxsize,log)
   result2 <- .xo.signalprocessor(result,reversal)
