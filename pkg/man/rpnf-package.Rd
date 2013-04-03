@@ -61,6 +61,8 @@ symbol.pnf
 
 # Moreover it can be plotted in a modern style (still very alpha, traditional style planned)
 pnfplot(symbol.pnf,main="P&F Plot GDAXI (linear)")
+# Or in the old TXT style
+pnfplottxt(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
 
 ### Second example: logarithmc example
 # For most stocks and indices it is useful
@@ -73,15 +75,17 @@ symbol.pnf <- pnfprocessor(
   high=GDAXI$High,
   low=GDAXI$Low,
   date=GDAXI$Date,
-  boxsize=getLogBoxsize(1),
+  boxsize=getLogBoxsize(2),
   log=TRUE)  
 
 # View the result
 symbol.pnf
 #View(symbol.pnf)
 
-# or plot it as a chart
+# or plot it as a modern chart
 pnfplot(symbol.pnf,main="P&F Plot GDAXI (log)")
+# Or in the old traditional TXT style
+pnfplottxt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (log)")
 
 ### Additional examples
 # Examples for additional uses cases like
