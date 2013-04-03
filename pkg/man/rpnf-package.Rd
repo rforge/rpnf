@@ -22,9 +22,9 @@ Index:
 \preformatted{
 rpnf-package            Point and Figure Library
 }
-~~ TODO An overview of how to use the package, including the most ~~
-~~ important functions ~~
-Check following functions: pnfprocessor() and pnfplot().
+Check pnfprocessor() and pnfplot() and see examples for usage.
+
+Feedback, Bugs and Feature requests can be submitted to https://r-forge.r-project.org/projects/rpnf/
 }
 \author{
 Sascha M. Herrmann
