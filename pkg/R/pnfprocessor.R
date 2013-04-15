@@ -16,17 +16,34 @@
 #'   high=GDAXI$High,
 #'   low=GDAXI$Low,
 #'   date=GDAXI$Date,
-#'   boxsize=100,
+#'   boxsize=100L,
 #'   log=FALSE)  
 #' 
-pnfprocessor <- function(high,low=high,date=NULL,reversal=3, boxsize=1, log=FALSE) {
+pnfprocessor <- function(high,low=high,date,reversal=3L, boxsize=1, log=FALSE) {
   result <- .xo.processor(high,low,date,reversal,boxsize,log)
   result2 <- .xo.signalprocessor(result,reversal)
   result2
 }
 
 # determine pnf series for given data
-.xo.processor <- function(high,low=high, date=NULL, reversal=3, boxsize=1, log=FALSE) {
+.xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE) {
+  # TODO implement sanity checks
+  if (class(high)!="numeric")
+    stop("ERROR: Class of parameter high must be numeric!")
+  if (class(low)!="numeric")
+    stop("ERROR: Class of parameter low must be numeric!")
+  if (class(date)!="Date")
+    stop("ERROR: Class of parameter date must be Date!")
+  if (class(reversal)!="integer")
+    stop("ERROR: Class of parameter reversal must be integer!")
+  if (reversal <= 0)
+    stop("ERROR: Value of parameter reversal must be a positive integer!")
+  if (class(log)!="logical" | is.na(log))
+    stop("ERROR: Value of parameter log must be either TRUE or FALSE!")
+  if (length(high)!=length(low))
+    stop("ERROR: length of high's must be as long as length of low's")
+  if (!is.null(date) & length(high)!=length(date))
+    stop("ERROR: length of high's must be as long as length of low's")
   # add additional columns
   status.xo <- rep(NA,length.out=length(high))  # current state of X/O signal
   boxnumber <- rep(NA,length.out=length(high))  # current integer box number (used for internal processes)
@@ -129,8 +146,6 @@ pnfprocessor <- function(high,low=high,date=NULL,reversal=3, boxsize=1, log=FALS
       }
     }
   }
-  if (is.null(date))
-    date <- as.Date(rownames(data.frame(high)))
   return (data.frame(date,high,low,boxnumber,column,status.xo,nextX,nextO,status.bs,lastNextX,lastNextO))
 }
 

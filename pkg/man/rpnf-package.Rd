@@ -12,10 +12,10 @@ The R Point & Figure Library is a tool set to create and analyze Point & Figure 
 \tabular{ll}{
 Package: \tab rpnf\cr
 Type: \tab Package\cr
-Version: \tab 0.0.1\cr
-Date: \tab 2013-03-31\cr
+Version: \tab 0.9.0\cr
+Date: \tab 2013-04-15\cr
 License: \tab GPL-3\cr
-Built: \tab R 2.15.3; ; 2013-04-02 07:37:11 UTC; windows\cr
+Built: \tab R 2.15.3; ; 2013-04-15 07:37:11 UTC; windows\cr
 }
 
 Index:
@@ -51,7 +51,7 @@ symbol.pnf <- pnfprocessor(
   high=GDAXI$High,
   low=GDAXI$Low,
   date=GDAXI$Date,
-  boxsize=100,
+  boxsize=100L,
   log=FALSE)  
 
 # Result of the pnfprocessor is a data table, 
@@ -62,7 +62,7 @@ symbol.pnf
 # Moreover it can be plotted in a modern style (still very alpha, traditional style planned)
 pnfplot(symbol.pnf,main="P&F Plot GDAXI (linear)")
 # Or in the old TXT style
-pnfplottxt(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
+pnfplottxt(symbol.pnf,boxsize=100L,log=FALSE,main="P&F Plot GDAXI (linear)")
 
 ### Second example: logarithmc example
 # For most stocks and indices it is useful
@@ -92,5 +92,6 @@ pnfplottxt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (lo
 # - relative strength vs index
 # - bullish percent of an index
 # - and many others 
-# will follow soon.
+# can be found in your local package library directory.
+# Search for rpnf-example1.R, rpnf-example2.R and rpnf-example3.R.
 }

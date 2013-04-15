@@ -2,7 +2,7 @@
 \alias{pnfprocessor}
 \title{Generate all point and figure informations for a given time series.}
 \usage{
-  pnfprocessor(high, low = high, date = NULL, reversal = 3,
+  pnfprocessor(high, low = high, date, reversal = 3L,
     boxsize = 1, log = FALSE)
 }
 \arguments{
