@@ -23,4 +23,9 @@
   THIS FUNCTION IS STILL UNDER HEAVY DEVELOPMENT, THEREFORE
   IT IS SUBJECT TO CHANGE!
 }
+\seealso{
+  \code{\link{pnfprocessor}}
+
+  \code{\link{pnfplot}}
+}
 

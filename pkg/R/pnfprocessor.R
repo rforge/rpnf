@@ -10,6 +10,9 @@
 #' @param log should we do the calculations on a logarithmic scale
 #' @return returns a data table with all point and figure information in it
 #' @export
+#' @seealso \code{\link{pnfplot}}
+#' @seealso \code{\link{pnfplottxt}}
+#' @examples
 #' library(rpnf) # Load rpnf library
 #' data(GDAXI) # Load some example data
 #' pnfprocessor(

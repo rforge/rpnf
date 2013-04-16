@@ -21,8 +21,11 @@ Built: \tab R 2.15.3; ; 2013-04-15 07:37:11 UTC; windows\cr
 Index:
 \preformatted{
 rpnf-package            Point and Figure Library
+pnfprocessor            Creates point and figure information for a given time series
+pnfplot                 Creates a modern style plot of point and figure informations
+pnfplottxt              Creates a traditional TXT style plot of point and figure informations
 }
-Check pnfprocessor() and pnfplot() and see examples for usage.
+Check \code{\link[rpnf]{pnfprocessor}} and \code{\link{pnfplot}} and see examples (rpnf-example{1,2,3}.R) for usage.
 
 Feedback, Bugs and Feature requests can be submitted to https://r-forge.r-project.org/projects/rpnf/
 }
@@ -42,7 +45,7 @@ Dorsey, Thomas. Sicher anlegen mit point & figure: klare Signale mit einfachen M
 ### Initialize library
 library(rpnf) # Load rpnf library
 data(GDAXI) # Load some example data
-#View(GDAXI) # here highs and lows of german DAX30 stock index for 2-years
+#View(GDAXI) # here highs and lows of german DAX30 stock index for 3-years
 
 ### First example: linear analysis
 # Determine point and figure informations 
@@ -70,7 +73,7 @@ pnfplottxt(symbol.pnf,boxsize=100L,log=FALSE,main="P&F Plot GDAXI (linear)")
 # This can be done with pnfprocessor, too. 
 # Ensure to make use of the getLogBoxsize() function 
 # for an appropriate boxsize of a logarithmic chart.
-# Determine point and figure informations for a logarithmic chart with boxsize 1\% 
+# Determine point and figure informations for a logarithmic chart with boxsize 2\% 
 symbol.pnf <- pnfprocessor(
   high=GDAXI$High,
   low=GDAXI$Low,

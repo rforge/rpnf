@@ -9,6 +9,8 @@
 #' @param log are calculations done in logarithmic mode
 #' @param main a string used as a main title of the chart
 #' @param sub a string used as a sub title of the chart
+#' @seealso \code{\link{pnfprocessor}}
+#' @seealso \code{\link{pnfplot}}
 #' @export
 pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
   ## local function definiton: plot seperation line

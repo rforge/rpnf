@@ -2,6 +2,8 @@
 #' 
 #' @param data a data frame object containing point and figure informations to be plotted
 #' @param ... any additional options for the plot command
+#' @seealso \code{\link{pnfprocessor}}
+#' @seealso \code{\link{pnfplottxt}}
 #' @export
 pnfplot <- function(data,...) {
   # determine boundaries

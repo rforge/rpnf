@@ -13,4 +13,9 @@
 \description{
   Generate a modern point and figure plot
 }
+\seealso{
+  \code{\link{pnfprocessor}}
+
+  \code{\link{pnfplottxt}}
+}
 

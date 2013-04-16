@@ -28,4 +28,19 @@
   Please ensure that high, low and date are all ordered
   according to the Date column.
 }
+\examples{
+library(rpnf) # Load rpnf library
+data(GDAXI) # Load some example data
+pnfprocessor(
+  high=GDAXI$High,
+  low=GDAXI$Low,
+  date=GDAXI$Date,
+  boxsize=100L,
+  log=FALSE)
+}
+\seealso{
+  \code{\link{pnfplot}}
+
+  \code{\link{pnfplottxt}}
+}
 

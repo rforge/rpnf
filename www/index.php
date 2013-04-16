@@ -88,5 +88,23 @@ Point & Figure Plot DAX30 (log)
 </tr>
 </table>
 
+<!-- Start of StatCounter Code for Netscape Composer -->
+<script type="text/javascript">
+var sc_project=8875301; 
+var sc_invisible=1; 
+var sc_security="e94b74b3"; 
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" +
+scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="web statistics"
+href="http://statcounter.com/free-web-stats/"
+target="_blank"><img class="statcounter"
+src="http://c.statcounter.com/8875301/0/e94b74b3/1/"
+alt="web statistics"></a></div></noscript>
+<!-- End of StatCounter Code for Netscape Composer -->
+
 </body>
 </html>
