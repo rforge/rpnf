@@ -9,7 +9,7 @@ stockData <- new.env() #Make a new environment for quantmod to store data in
 ### Define wrapper for quantmod download function
 downloadDatas <- function(symbols=c("GOOG")) {
   startDate = as.Date(Sys.Date()-3*365) #Specify period of time we are interested in
-  endDate = as.Date(Sys.Date()) # End date is today
+  endDate = as.Date(Sys.Date()+1) # End date is today
   getSymbols(symbols, env = stockData, src = "yahoo", from = startDate, to = endDate)   #Download the stock history (for all tickers)
   ### extract stock quotes from enviorment, rename them and store to data.frame 
   symbolQuotes <- data.frame()
@@ -61,18 +61,27 @@ for (symbol in symbolTable[,2]) {
 bptable<-table(symbolPnf$date,symbolPnf$status.bs)
 bp<-bptable[,"Buy"]/(bptable[,"Buy"]+bptable[,"Sell"])
 bpPnf <- pnfprocessor(high=bp,date=as.Date(names(bp)),boxsize=0.02,log=FALSE)
+# generate ascending percent chart
+asctable<-table(symbolPnf$date,symbolPnf$status.xo)
+asc<-asctable[,"X"]/(asctable[,"X"]+asctable[,"O"])
+ascPnf <- pnfprocessor(high=asc,date=as.Date(names(asc)),boxsize=0.02,log=FALSE)
 # generate plots
 for (s in symbolTable[,2]) {
   print(paste("plotting symbol: ",s))
-  oldpar <- par()
+  #oldpar <- par()
   # create plotting canvas
-  par(mfrow=c(3,1))
+  png(filename=paste(s,".png"),width=3200,height=1800)
+  par(mfrow=c(4,1))
   # plot symbol chart
   pnfplot(symbolPnf[symbolPnf$symbol==s,],main=paste("Commodity chart: ",s))
   # plot symbol rs
   pnfplot(symbolRS[symbolRS$symbol==s,],main=paste("Relative strength chart: ",s," vs. ",index))
   # plot index bp
   pnfplot(bpPnf,main=paste("Bullish percent chart: ",index))
+  # plot index asc
+  pnfplot(ascPnf,main=paste("Ascending percent chart: ",index))
   # restore plot settings
-  par(oldpar)
+  dev.off()
+  #par(oldpar)
 }
+

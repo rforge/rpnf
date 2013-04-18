@@ -28,6 +28,6 @@ pnf <- pnfprocessor(high=data$high,low=data$low,date=index(data),boxsize=boxsize
 # View result data
 View(pnf)
 # Plot result as text to console
-pnfplot.txt(pnf,boxsize=boxsize,log=log,main=paste("P&F Plot ",symbol))
+pnfplottxt(pnf,boxsize=boxsize,log=log,main=paste("P&F Plot ",symbol))
 # Plot result as graphic
 pnfplot(pnf,main=paste("P&F Plot ",symbol))

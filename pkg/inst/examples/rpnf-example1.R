@@ -22,7 +22,7 @@ symbol.pnf
 
 # Moreover it can be plotted in a modern style (still very alpha, traditional style planned)
 pnfplot(symbol.pnf,main="P&F Plot GDAXI (linear)")
-pnfplot.txt(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
+pnfplottxt(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
 
 ### Second example: logarithmc example
 # For most stocks and indices it is useful
@@ -44,7 +44,7 @@ symbol.pnf
 
 # or plot it as a chart
 pnfplot(symbol.pnf,main="P&F Plot GDAXI (log)")
-pnfplot.txt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (log)")
+pnfplottxt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (log)")
 
 ### Additional examples
 # Examples for additional uses cases like

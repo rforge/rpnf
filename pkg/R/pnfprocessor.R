@@ -31,10 +31,10 @@ pnfprocessor <- function(high,low=high,date,reversal=3L, boxsize=1, log=FALSE) {
 # determine pnf series for given data
 .xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE) {
   # TODO implement sanity checks
-  if (class(high)!="numeric")
-    stop("ERROR: Class of parameter high must be numeric!")
-  if (class(low)!="numeric")
-    stop("ERROR: Class of parameter low must be numeric!")
+  if (typeof(high)!="double")
+    stop("ERROR: Typeof of parameter high must be double!")
+  if (typeof(low)!="double")
+    stop("ERROR: Typeof of parameter low must be double!")
   if (class(date)!="Date")
     stop("ERROR: Class of parameter date must be Date!")
   if (class(reversal)!="integer")

@@ -6,6 +6,8 @@
 #' @seealso \code{\link{pnfplottxt}}
 #' @export
 pnfplot <- function(data,...) {
+  if (length(intersect(names(data),c("date","nextO","nextX","status.xo","status.bs","high","low")))!=7)
+    stop(paste("input data frame must contain columns ",c("date","nextO","nextX","status.xo","status.bs","high","low"),"!"))
   # determine boundaries
   xlim <- c(min(data$date),max(data$date))
   ylim <- c(min(data$nextO),max(data$nextX))
@@ -16,13 +18,13 @@ pnfplot <- function(data,...) {
   index.OB <- data$status.xo=="O"&data$status.bs=="Buy"
   index.OS <- data$status.xo=="O"&data$status.bs=="Sell"
   # for X-columns plot highs
-  points(data$date[index.XB],data[index.XB,2],pch=4,col="green",cex=0.75)
-  points(data$date[index.XS],data[index.XS,2],pch=4,col="red",cex=0.75)
+  points(data$date[index.XB],data$high[index.XB],pch=4,col="green",cex=0.75)
+  points(data$date[index.XS],data$high[index.XS],pch=4,col="red",cex=0.75)
   # plot nextX as green line
   lines(data$date,data$nextX,col="dark green",lwd=2)
   # for O-columns plot lows with pch=1
-  points(data$date[index.OB],data[index.OB,3],pch=1,col="green",cex=0.75)
-  points(data$date[index.OS],data[index.OS,3],pch=1,col="red",cex=0.75)
+  points(data$date[index.OB],data$low[index.OB],pch=1,col="green",cex=0.75)
+  points(data$date[index.OS],data$low[index.OS],pch=1,col="red",cex=0.75)
   # plot nextO as red line
   lines(data$date,data$nextO,col="dark red",lwd=2)
 }
