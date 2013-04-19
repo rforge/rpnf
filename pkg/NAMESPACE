@@ -1,2 +1,4 @@
-exportPattern("^[^\\.]")
-#exportPattern("^[[:alpha:]]+")
+export(getLogBoxsize)
+export(pnfplot)
+export(pnfplottxt)
+export(pnfprocessor)

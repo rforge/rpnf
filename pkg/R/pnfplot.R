@@ -4,7 +4,21 @@
 #' @param ... any additional options for the plot command
 #' @seealso \code{\link{pnfprocessor}}
 #' @seealso \code{\link{pnfplottxt}}
+#' @references \url{http://rpnf.r-forge.r-project.org}
 #' @export
+#' @examples
+#' library(rpnf) # Load rpnf library
+#' data(GDAXI) # Load some example data
+#' pnfdata <- pnfprocessor(
+#'   high=GDAXI$High,
+#'   low=GDAXI$Low,
+#'   date=GDAXI$Date,
+#'   boxsize=100L,
+#'   log=FALSE)  
+#' tail(pnfdata)
+#' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
+#' pnfplot(pnfdata)
+
 pnfplot <- function(data,...) {
   if (length(intersect(names(data),c("date","nextO","nextX","status.xo","status.bs","high","low")))!=7)
     stop(paste("input data frame must contain columns ",c("date","nextO","nextX","status.xo","status.bs","high","low"),"!"))

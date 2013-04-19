@@ -12,16 +12,19 @@
 #' @export
 #' @seealso \code{\link{pnfplot}}
 #' @seealso \code{\link{pnfplottxt}}
+#' @references \url{http://rpnf.r-forge.r-project.org}
 #' @examples
 #' library(rpnf) # Load rpnf library
 #' data(GDAXI) # Load some example data
-#' pnfprocessor(
+#' pnfdata <- pnfprocessor(
 #'   high=GDAXI$High,
 #'   low=GDAXI$Low,
 #'   date=GDAXI$Date,
 #'   boxsize=100L,
 #'   log=FALSE)  
-#' 
+#' tail(pnfdata)
+#' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
+#' pnfplot(pnfdata)
 pnfprocessor <- function(high,low=high,date,reversal=3L, boxsize=1, log=FALSE) {
   result <- .xo.processor(high,low,date,reversal,boxsize,log)
   result2 <- .xo.signalprocessor(result,reversal)

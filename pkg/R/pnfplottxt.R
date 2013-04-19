@@ -11,7 +11,21 @@
 #' @param sub a string used as a sub title of the chart
 #' @seealso \code{\link{pnfprocessor}}
 #' @seealso \code{\link{pnfplot}}
+#' @references \url{http://rpnf.r-forge.r-project.org}
 #' @export
+#' @examples
+#' library(rpnf) # Load rpnf library
+#' data(GDAXI) # Load some example data
+#' pnfdata <- pnfprocessor(
+#'   high=GDAXI$High,
+#'   low=GDAXI$Low,
+#'   date=GDAXI$Date,
+#'   boxsize=100L,
+#'   log=FALSE)  
+#' tail(pnfdata)
+#' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
+#' pnfplot(pnfdata)
+
 pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
   ## local function definiton: plot seperation line
   plotSeperationLine <- function(numOfColumns) {

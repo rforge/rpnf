@@ -23,6 +23,22 @@
   THIS FUNCTION IS STILL UNDER HEAVY DEVELOPMENT, THEREFORE
   IT IS SUBJECT TO CHANGE!
 }
+\examples{
+library(rpnf) # Load rpnf library
+data(GDAXI) # Load some example data
+pnfdata <- pnfprocessor(
+  high=GDAXI$High,
+  low=GDAXI$Low,
+  date=GDAXI$Date,
+  boxsize=100L,
+  log=FALSE)
+tail(pnfdata)
+pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
+pnfplot(pnfdata)
+}
+\references{
+  \url{http://rpnf.r-forge.r-project.org}
+}
 \seealso{
   \code{\link{pnfprocessor}}
 
