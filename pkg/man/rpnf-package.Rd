@@ -10,7 +10,7 @@
 }
 \details{
   \tabular{ll}{ Package: \tab rpnf\cr Type: \tab Package\cr
-  Version: \tab 0.9.0\cr Date: \tab 2013-04-19\cr License:
+  Version: \tab 0.9.1\cr Date: \tab 2013-04-19\cr License:
   \tab GPL-3\cr Built: \tab R 2.15.3; ; 2013-04-15 07:37:11
   UTC; windows\cr }
 }
