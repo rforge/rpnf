@@ -10,6 +10,7 @@ Description: The R Point & Figure Library is a tool set to create and analyze
 License: GPL-3
 Depends:
     RUnit
+    roxygen2
 Suggests:
     quantmod
 Collate:
