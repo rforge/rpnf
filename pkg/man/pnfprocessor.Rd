@@ -3,7 +3,7 @@
 \title{Generate all point and figure informations for a given time series.}
 \usage{
   pnfprocessor(high, low = high, date, reversal = 3L,
-    boxsize = 1, log = FALSE)
+    boxsize = 1, log = FALSE, style = "xo")
 }
 \arguments{
   \item{high}{a vector containing the high quotes}

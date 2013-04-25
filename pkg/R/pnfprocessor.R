@@ -25,10 +25,31 @@
 #' tail(pnfdata)
 #' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
 #' pnfplot(pnfdata)
-pnfprocessor <- function(high,low=high,date,reversal=3L, boxsize=1, log=FALSE) {
+pnfprocessor <- function(
+  high,
+  low=high,
+  date,
+  reversal=3L, 
+  boxsize=1, 
+  log=FALSE,
+  style="xo") {
+  # check for proper style selection
+  if (!style %in% c("xo","rs","bp")) {
+    stop("Select a proper chart style: 'xo', 'rs' or'bp'!")
+  }
+  # first execute basic time series processing
   result <- .xo.processor(high,low,date,reversal,boxsize,log)
-  result2 <- .xo.signalprocessor(result,reversal)
-  result2
+  # now check for style to enhance the result
+  if (style == "xo") {
+    result <- .xo.signalprocessor(result,reversal)
+  } else if (style == "bp") {
+    result <- .bp.signalprocessor(result)
+  } else if (style == "rs") {
+    result <- rs.signal.processor(result)
+  } else {
+    warning("Unknown style detected! No chart enhancements were made!")
+  }
+  result
 }
 
 # determine pnf series for given data
@@ -339,6 +360,40 @@ pnfprocessor <- function(high,low=high,date,reversal=3L, boxsize=1, log=FALSE) {
   }
   data
 }
+
+#' This function analyzes a (preliminary) P&F Chart for Bullish Support Line and Bearish Resistance Line
+#' 
+#' Finding the appropriate trendlines is explained very good at \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}.
+#' 
+#' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}
+rs.signal.processor <- function(data) {
+  warning("This function is not implemented yet!")
+  data
+  # TODO implement function
+}
+
+#' This function analyzes a (preliminary) P&F Chart for Bullish Support Line and Bearish Resistance Line
+#' 
+#' Finding the appropriate trendlines is explained very good at \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}.
+#' 
+#' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}
+xo.trendline.processor <- function(data) {
+  warning("This function is not implemented yet!")
+  data
+  # TODO implement function
+}
+
+#' This function analyzes a (preliminary) P&F Chart for Price Objectives
+#' 
+#' Finding the appropriate price objectives is explained very good at \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}.
+#' 
+#' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}
+xo.priceobjective.processor <- function(data) {
+  warning("This function is not implemented yet!")
+  data
+  # TODO implement function
+}
+
 
 # analyze transitions of signal states
 .signalanalyzer <- function(signal,probability=TRUE) {

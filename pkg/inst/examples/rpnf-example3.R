@@ -55,16 +55,16 @@ for (symbol in symbolTable[,2]) {
   data <- symbolQuotes[symbolQuotes$symbol==symbol,]
   rs <- merge(data,indexQuotes,by="date")
   symbolPnf <- rbind(symbolPnf, cbind(symbol,pnfprocessor(data$high,data$low,date=as.Date(data$date),boxsize=boxsize,log=log)))
-  symbolRS <- rbind(symbolRS, cbind(symbol,pnfprocessor(rs$close.x/rs$close.y,date=as.Date(rs$date),boxsize=boxsize,log=log)))
+  symbolRS <- rbind(symbolRS, cbind(symbol,pnfprocessor(rs$close.x/rs$close.y,date=as.Date(rs$date),boxsize=boxsize,log=log,style="rs")))
 }
 # generate bullish percent chart
 bptable<-table(symbolPnf$date,symbolPnf$status.bs)
 bp<-bptable[,"Buy"]/(bptable[,"Buy"]+bptable[,"Sell"])
-bpPnf <- pnfprocessor(high=bp,date=as.Date(names(bp)),boxsize=0.02,log=FALSE)
+bpPnf <- pnfprocessor(high=bp,date=as.Date(names(bp)),boxsize=0.02,log=FALSE,style="bp")
 # generate ascending percent chart
 asctable<-table(symbolPnf$date,symbolPnf$status.xo)
 asc<-asctable[,"X"]/(asctable[,"X"]+asctable[,"O"])
-ascPnf <- pnfprocessor(high=asc,date=as.Date(names(asc)),boxsize=0.02,log=FALSE)
+ascPnf <- pnfprocessor(high=asc,date=as.Date(names(asc)),boxsize=0.02,log=FALSE,style="bp")
 # generate plots
 for (s in symbolTable[,2]) {
   print(paste("plotting symbol: ",s))
