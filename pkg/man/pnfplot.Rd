@@ -2,7 +2,8 @@
 \alias{pnfplot}
 \title{Generate a modern point and figure plot}
 \usage{
-  pnfplot(data, ...)
+  pnfplot(data, reversal = 3, boxsize = 1, log = FALSE,
+    ...)
 }
 \arguments{
   \item{data}{a data frame object containing point and

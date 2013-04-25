@@ -11,14 +11,14 @@ downloadData <- function(symbol="GOOG") {
   endDate = as.Date(Sys.Date()) # End date is today
   getSymbols(symbol, env = stockData, src = "yahoo", from = startDate, to = endDate)   #Download the stock history (for all tickers)
   ### extract stock quotes from enviorment, rename them and store to data.frame 
-  symbolData <- eval(parse(text=paste("OHLC(stockData$",symbol,")",sep="")))
+  symbolData <- eval(parse(text=paste("OHLC(stockData$",sub("^\\^","",symbol),")",sep="")))
   names(symbolData)<-c("open","high","low","close")
   symbolData
 }
 
 ### The example code starts
 # Define (yahoo) symbol to be processed
-symbol <- "GOOG" # e.g. "GOOG", "^DJI", "^GDAXI", "A"
+symbol <- "^GDAXI" # e.g. "GOOG", "^DJI", "^GDAXI", "A"
 # download stock quotes for last 3 years
 data <- downloadData(symbol)
 # Generate point and figure informations
@@ -30,4 +30,4 @@ View(pnf)
 # Plot result as text to console
 pnfplottxt(pnf,boxsize=boxsize,log=log,main=paste("P&F Plot ",symbol))
 # Plot result as graphic
-pnfplot(pnf,main=paste("P&F Plot ",symbol))
+pnfplot(pnf,boxsize=boxsize,log=log,main=paste("P&F Plot ",symbol))

@@ -45,8 +45,6 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
   # cat to connection object
   for (mybox in max(data$boxnumber):min(data$boxnumber)) {
     ### iterate over every line
-    # write boxnumber, later we should better write lower bound on box  (TODO)
-    #cat(round(rpnf:::.box2lower(mybox,boxsize=boxsize,log=log),digits=2))
     cat(format(round(rpnf:::.box2lower(mybox,boxsize=boxsize,log=log),2),width=8))
     cat("|")
     # iterate through columns
@@ -61,10 +59,20 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
         else
           mymax <- max(data$boxnumber[data$column==column-1])-1
       }
+      # determine trendline boxes, if available
+      trendline <- NA
+      if ("tl.brl.boxnumber" %in% names(data) | "tl.bsl.boxnumber" %in% names(data)) {
+#        trendline <- c(min(data[data$column==column, c("tl.brl.boxnumber","tl.bsl.boxnumber")],na.rm=T),
+#                       max(data[data$column==column, c("tl.brl.boxnumber","tl.bsl.boxnumber")],na.rm=T))
+        trendline <- unique(data[data$column==column, c("tl.brl.boxnumber","tl.bsl.boxnumber")])
+      }
+      warning(paste("column=",column,"; trendline=",trendline))
       # decide on plot
-      if (mymin<=mybox & mybox<=mymax)
+      if (mymin<=mybox & mybox<=mymax) {
         cat(status)
-      else
+      } else if (mybox %in% trendline) {
+        cat("+")
+      } else
         cat(" ")
     } # end column loop
     # write line feed

@@ -58,13 +58,14 @@ for (symbol in symbolTable[,2]) {
   symbolRS <- rbind(symbolRS, cbind(symbol,pnfprocessor(rs$close.x/rs$close.y,date=as.Date(rs$date),boxsize=boxsize,log=log,style="rs")))
 }
 # generate bullish percent chart
+boxsizeBP <- 0.02
 bptable<-table(symbolPnf$date,symbolPnf$status.bs)
 bp<-bptable[,"Buy"]/(bptable[,"Buy"]+bptable[,"Sell"])
-bpPnf <- pnfprocessor(high=bp,date=as.Date(names(bp)),boxsize=0.02,log=FALSE,style="bp")
+bpPnf <- pnfprocessor(high=bp,date=as.Date(names(bp)),boxsize=boxsizeBP,log=FALSE,style="bp")
 # generate ascending percent chart
 asctable<-table(symbolPnf$date,symbolPnf$status.xo)
 asc<-asctable[,"X"]/(asctable[,"X"]+asctable[,"O"])
-ascPnf <- pnfprocessor(high=asc,date=as.Date(names(asc)),boxsize=0.02,log=FALSE,style="bp")
+ascPnf <- pnfprocessor(high=asc,date=as.Date(names(asc)),boxsize=boxsizeBP,log=FALSE,style="bp")
 # generate plots
 for (s in symbolTable[,2]) {
   print(paste("plotting symbol: ",s))
@@ -73,13 +74,13 @@ for (s in symbolTable[,2]) {
   png(filename=paste(s,".png"),width=3200,height=1800)
   par(mfrow=c(4,1))
   # plot symbol chart
-  pnfplot(symbolPnf[symbolPnf$symbol==s,],main=paste("Commodity chart: ",s))
+  pnfplot(symbolPnf[symbolPnf$symbol==s,],boxsize=boxsize,log=log,main=paste("Commodity chart: ",s))
   # plot symbol rs
-  pnfplot(symbolRS[symbolRS$symbol==s,],main=paste("Relative strength chart: ",s," vs. ",index))
+  pnfplot(symbolRS[symbolRS$symbol==s,],boxsize=boxsize,log=log,main=paste("Relative strength chart: ",s," vs. ",index))
   # plot index bp
-  pnfplot(bpPnf,main=paste("Bullish percent chart: ",index))
+  pnfplot(bpPnf,boxsize=boxsizeBP,log=F,main=paste("Bullish percent chart: ",index))
   # plot index asc
-  pnfplot(ascPnf,main=paste("Ascending percent chart: ",index))
+  pnfplot(ascPnf,boxsize=boxsizeBP,log=F,main=paste("Ascending percent chart: ",index))
   # restore plot settings
   dev.off()
   #par(oldpar)

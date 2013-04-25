@@ -17,11 +17,11 @@ symbol.pnf <- pnfprocessor(
 
 # Result of the pnfprocessor is a data table, 
 # which can be viewed and exported easily.
-symbol.pnf
+tail(symbol.pnf)
 #View(symbol.pnf)
 
 # Moreover it can be plotted in a modern style (still very alpha, traditional style planned)
-pnfplot(symbol.pnf,main="P&F Plot GDAXI (linear)")
+pnfplot(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
 pnfplottxt(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
 
 ### Second example: logarithmc example
@@ -39,11 +39,11 @@ symbol.pnf <- pnfprocessor(
   log=TRUE)  
 
 # View the result
-symbol.pnf
+tail(symbol.pnf)
 #View(symbol.pnf)
 
 # or plot it as a chart
-pnfplot(symbol.pnf,main="P&F Plot GDAXI (log)")
+pnfplot(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (log)")
 pnfplottxt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (log)")
 
 ### Additional examples
