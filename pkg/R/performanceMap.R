@@ -1,3 +1,5 @@
+library(colorRamps)
+
 #' This function calculates an upper triangle performance map for a given time 
 #' series.
 #' 
@@ -25,7 +27,7 @@ CalcPerformanceMap <- function(quotes, column = "close", mode = c("abs","rel")) 
 
 #' This function plots a performance map as an heatmap.
 #'
-#' TODO: Create a proper colormap centered at 0 
+#' TODO: Create a proper colormap centered at 0 (perhaps via rescaling)
 #' TODO: Label axes with date instead of numbers
 #' @seealso \url{http://www.nytimes.com/interactive/2011/01/02/business/20110102-metrics-graphic.html}
 PlotPerformanceMap <- function(quotes, column = "close", ...) {
@@ -35,11 +37,11 @@ PlotPerformanceMap <- function(quotes, column = "close", ...) {
   # prepare plot
   oldpar<-par()
   par(mfrow=c(2,1))
-  image(index(quotes),index(quotes),t(map_abs),
+  image(index(quotes),index(quotes),-t(map_abs),col=green2red(10),
         main="Absolute return of investment",
         xlab="End of investment",
         ylab="Start of investment")
-  image(index(quotes),index(quotes),t(map_rel),
+  image(index(quotes),index(quotes),-t(map_rel),col=green2red(10),
         main="Relative return of investment",
         xlab="End of investment",
         ylab="Start of investment")
