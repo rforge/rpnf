@@ -11,17 +11,9 @@ downloadDatas <- function(symbols=c("GOOG")) {
   startDate = as.Date(Sys.Date()-3*365) #Specify period of time we are interested in
   endDate = as.Date(Sys.Date()+1) # End date is today
   getSymbols(symbols, env = stockData, src = "yahoo", from = startDate, to = endDate)   #Download the stock history (for all tickers)
-  ### extract stock quotes from enviorment, rename them and store to data.frame 
-  symbolQuotes <- data.frame()
-  for (s in symbols) {
-    symbolData <- eval(parse(text=paste("OHLC(stockData$",sub("^\\^","",s),")",sep="")))
-    names(symbolData)<-c("open","high","low","close")
-    date <- index(symbolData)
-    #symbolData$symbol <- rep(s,length.out=nrow(symbolData))
-    symbol<-rep(s,length.out=nrow(symbolData))
-    symbolQuotes <- rbind(symbolQuotes,cbind(as.data.frame(symbolData),symbol,date))    
-  }
-  symbolQuotes
+  ### rename xts-columns
+  for (s in symbols) 
+    eval(parse(text=paste("names(stockData$",sub("^\\^","",s),")<-c(\"open\",\"high\",\"low\",\"close\",\"volume\",\"adjusted\")",sep="")))
 }
 
 ### Define wrapper for getting an appropriate symbol table
@@ -34,39 +26,70 @@ getSymbolTable <- function(index) {
   data.frame(index,symbol)
 }
 
+# Function to show progress on 
+printProgress <- function(i,n,step=1,start.time=NULL) {
+  if (i %% step == 0 | i == n) {
+    percentDone <- i/n;
+    if (!is.null(start.time)) {
+      timeElapsed <- as.numeric(difftime(Sys.time(), start.time, units="secs"));
+      totalTimePrediction <- timeElapsed/percentDone;
+      timeToFinish <- totalTimePrediction-timeElapsed;
+      linesPerSecond <- i/timeElapsed;
+      cat(paste(i, "/", n," \t(", round(100*percentDone, digits=2), "%) \t",round(linesPerSecond,digits=2)," lines/s\t",round(totalTimePrediction,digits=2),"s ETT \t",round(timeToFinish,digits=2),"s ETF\n", sep=""));
+    } else {
+      cat(paste(i, "/", n," \t (", round(100*percentDone, digits=2), "%)"))       
+    }
+  }
+}
+
 ### The example code starts
 boxsize <- getLogBoxsize(percent=2.5)
 log <- TRUE
 # Define (yahoo) index symbol (with "^") to be processed
 index <- "^GDAXI" # e.g. GDAXI, DJI, see http://finance.yahoo.com for more
+# download stock quotes for index
+downloadDatas(c(index))
+index.xts <- eval(parse(text=paste("OHLC(stockData$",sub("^\\^","",index),")",sep="")))
+# create PNF information for index
+indexPnf <- pnfprocessor(index.xts[,2],index.xts[,3],index(index.xts),boxsize=boxsize,log=log)
 # Get list of composite symbols
 symbolTable <- getSymbolTable(index)
-# download stock quotes for index
-indexQuotes <- downloadDatas(c(index))
-indexPnf <- pnfprocessor(indexQuotes$high,indexQuotes$low,indexQuotes$date,boxsize=boxsize,log=log)
 # download stock quotes for composite symbols
-symbolQuotes <- downloadDatas(as.character(symbolTable$symbol))
+downloadDatas(as.character(symbolTable$symbol))
 # generate point and figure information for composite index
 symbolPnf <- data.frame()
 symbolRS <- data.frame()
 rs <- data.frame()
+i<-0
+start.time <- Sys.time()
 for (symbol in symbolTable[,2]) {
   print(paste("processing symbol: ",symbol))
-  data <- symbolQuotes[symbolQuotes$symbol==symbol,]
-  rs <- merge(data,indexQuotes,by="date")
-  symbolPnf <- rbind(symbolPnf, cbind(symbol,pnfprocessor(data$high,data$low,date=as.Date(data$date),boxsize=boxsize,log=log)))
-  symbolRS <- rbind(symbolRS, cbind(symbol,pnfprocessor(rs$close.x/rs$close.y,date=as.Date(rs$date),boxsize=boxsize,log=log,style="rs")))
+  #data <- symbolQuotes[symbolQuotes$symbol==symbol,]
+  #symbolPnf <- rbind(symbolPnf, cbind(symbol,pnfprocessor(data$high,data$low,date=as.Date(data$date),boxsize=boxsize,log=log)))
+  symbol.xts <- eval(parse(text=paste("OHLC(stockData$",sub("^\\^","",symbol),")",sep="")))
+  symbolPnf <- rbind(symbolPnf, cbind(symbol,
+                                      pnfprocessor(symbol.xts[,2],symbol.xts[,3],date=index(symbol.xts),boxsize=boxsize,log=log)))
+  # determine relative strength
+  rs.xts <- symbol.xts/index.xts
+  ### use new calcRS function
+  symbolRS <- rbind(symbolRS, cbind(symbol,
+                                    pnfprocessor(rs.xts[,2],rs.xts[,3],date=index(rs.xts),boxsize=boxsize,log=log,style="rs")))
+  i<-i+1
+  printProgress(i,n=length(symbolTable[,2]),step=1,start.time)
 }
+
 # generate bullish percent chart
-boxsizeBP <- 0.02
+boxsizeBP <- 2
 bptable<-table(symbolPnf$date,symbolPnf$status.bs)
-bp<-bptable[,"Buy"]/(bptable[,"Buy"]+bptable[,"Sell"])
+bp<-100*bptable[,"Buy"]/(bptable[,"Buy"]+bptable[,"Sell"])
 bpPnf <- pnfprocessor(high=bp,date=as.Date(names(bp)),boxsize=boxsizeBP,log=FALSE,style="bp")
 # generate ascending percent chart
 asctable<-table(symbolPnf$date,symbolPnf$status.xo)
-asc<-asctable[,"X"]/(asctable[,"X"]+asctable[,"O"])
+asc<-100*asctable[,"X"]/(asctable[,"X"]+asctable[,"O"])
 ascPnf <- pnfprocessor(high=asc,date=as.Date(names(asc)),boxsize=boxsizeBP,log=FALSE,style="bp")
 # generate plots
+i<-0
+start.time <- Sys.time()
 for (s in symbolTable[,2]) {
   print(paste("plotting symbol: ",s))
   #oldpar <- par()
@@ -84,5 +107,7 @@ for (s in symbolTable[,2]) {
   # restore plot settings
   dev.off()
   #par(oldpar)
+  i<-i+1
+  printProgress(i,n=length(symbolTable[,2]),step=1,start.time)
 }
 

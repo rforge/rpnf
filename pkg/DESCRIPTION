@@ -1,8 +1,8 @@
 Package: rpnf
 Type: Package
 Title: Point and Figure Library
-Version: 0.9.1
-Date: 2013-04-19
+Version: 0.9.2
+Date: 2013-07-22
 Author: Sascha M. Herrmann
 Maintainer: Sascha M. Herrmann <sascha.martin.herrmann@gmail.com>
 Description: The R Point & Figure Library is a tool set to create and analyze
@@ -14,13 +14,9 @@ Depends:
 Suggests:
     quantmod
 Collate:
-    'box2lower.R'
-    'box2upper.R'
     'getlogboxsize.R'
-    'nextBox.R'
-    'nextReversal.R'
     'pnfplot.R'
     'pnfplottxt.R'
     'pnfprocessor.R'
-    'quote2box.R'
     'rpnf-package.R'
+    'performanceMap.R'

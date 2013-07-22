@@ -8,7 +8,7 @@ stockData <- new.env() #Make a new environment for quantmod to store data in
 
 ### Define wrapper for quantmod download function
 downloadDatas <- function(symbols=c("GOOG")) {
-  startDate = as.Date(Sys.Date()-3*365) #Specify period of time we are interested in
+  startDate = as.Date(Sys.Date()-10*365) #Specify period of time we are interested in
   endDate = as.Date(Sys.Date()+1) # End date is today
   getSymbols(symbols, env = stockData, src = "yahoo", from = startDate, to = endDate)   #Download the stock history (for all tickers)
   ### rename xts-columns
