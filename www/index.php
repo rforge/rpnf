@@ -14,109 +14,79 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en   ">
-<!--
+
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><?php echo $group_name; ?></title>
 	<link href="http://<?php echo $themeroot; ?>styles/estilo1.css" rel="stylesheet" type="text/css" />
   </head>
--->
-  <head>
-<title>business solutions_sliced</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link href="style.css" rel="stylesheet" type="text/css" />
-</head>
 
- 
-<body bgcolor="#550403" style="leftmargin=0px; topmargin=0px; marginwidth=0px; marginheight=0px;">
-<span class="style6"></span>
-<!-- Save for Web Slices (business solutions_sliced.psd) -->
-<div id="body">
-<br />
-<br />
-<br />
- <table style="width=1001px; height=1001px;" border="0" align="center" cellpadding="0" cellspacing="0" id="Table_01">
-    <tr>
-      <td colspan="2" rowspan="3"><div id="logo">
-      <div class="logo"><a href="index.html"><span class="style5">rpnf<br /></span></a></div>
-      </div></td>
-<td colspan="3"><div class="style1" id="header">
-			<br />
-			R <span class="style3">POINT AND FIGURE LIBRARY</span>
-             <span class="style4"><br />
-             CREATE POINT AND FIGURE CHARTS FOR FREE IN R!</span></div></td>
-	      <td>
-		      <img src="images/spacer.gif" width="1" height="185" alt="" /></td>
-      </tr>
-    <tr>
-      <td><div class="top_menu">
-      <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="index.html">ABOUT</a></li>
-      <li><a href="index.html">F.A.Q.</a></li>
-      <li><a href="index.html">CONTACT</a></li>
-      </ul>
-      </div></td>
-	    <td colspan="2">
-	        <img src="images/index_04.jpg" width="128" height="42" alt="" /></td>
-	    <td>
-	        <img src="images/spacer.gif" width="1" height="42" alt="" /></td>
-      </tr>
-    <tr>
-      <td colspan="2" rowspan="2"><div id="content">
-      <div class="title">WELCOME DEAR FRIEND</div>
-      <div class=" content">
-        <p>The R Point and Figure Library is an open source tool-set to create and analyze Point & Figure Charts for given time series or data frame objects.</p>
-        <p>...</p>
-        <p>...</p>
-        <p><img src="images/image1.jpg" alt="image1" width="202" height="128" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/image2.jpg" alt="image2" width="202" height="128" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/image3.jpg" alt="image3" width="202" height="128" /></p>
-        <p>...</p>
-        <p>...</p>
-        <p>...</p>
-      </div>
-      </div></td>
-	    <td rowspan="3">
-	        <img src="images/index_06.jpg" width="27" height="773" alt="" /></td>
-	    <td>
-	        <img src="images/spacer.gif" width="1" height="76" alt="" /></td>
-      </tr>
-    <tr>
-      <td rowspan="2"><img src="images/index_07.jpg" width="70" height="697" alt=""/></td>
-      <td><div class="left_menu">
-        <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="index.html">FEATURES</a></li>
-        <li><a href="index.html">EXAMPLES</a></li>
-        <li><a href="index.html">DOWNLOAD</a></li>
-        <li><a href="index.html">F.A.Q.</a></li>
-        <li><a href="index.html">CONTACT</a></li>
-        </ul>
-        </div></td>
-	    <td>
-	        <img src="images/spacer.gif" width="1" height="651" alt="" /></td>
-      </tr>
-    <tr>
-      <td colspan="3"><div id="footer">COPYRIGHT (C) 2010 &quot;YOUR SITE&quot;. DESIGN BY <a href="http://www.e-globalspot.com">wholesale china</a></div></td>
-  <td>
-	        <img src="images/spacer.gif" width="1" height="46" alt="" /></td>
-      </tr>
-    <tr>
-      <td>
-        <img src="images/spacer.gif" width="70" height="1" alt="" /></td>
-	    <td>
-	        <img src="images/spacer.gif" width="179" height="1" alt="" /></td>
-	    <td>
-	        <img src="images/spacer.gif" width="623" height="1" alt="" /></td>
-	    <td>
-	        <img src="images/spacer.gif" width="101" height="1" alt="" /></td>
-	    <td>
-	        <img src="images/spacer.gif" width="27" height="1" alt="" /></td>
-	    <td></td>
-      </tr>
-  </table>
-  <div id="lft"><a href="http://www.e-globalspot.com">wholesale china</a></div><br />
-  <br />
-</div>
+<body>
+
+<!-- R-Forge Logo -->
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr><td>
+<a href="http://r-forge.r-project.org/"><img src="http://<?php echo $themeroot; ?>/imagesrf/logo.png" border="0" alt="R-Forge Logo" /> </a> </td> </tr>
+</table>
+
+
+<!-- get project title  -->
+<!-- own website starts here, the following may be changed as you like -->
+
+<?php if ($handle=fopen('http://'.$domain.'/export/projtitl.php?group_name='.$group_name,'r')){
+$contents = '';
+while (!feof($handle)) {
+	$contents .= fread($handle, 8192);
+}
+fclose($handle);
+echo $contents; } ?>
+
+<!-- end of project description -->
+
+<p> The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
+<p> Download the most <b>recent</b> version of rpnf-package <a href="https://r-forge.r-project.org/R/?group_id=1632"><strong>here</strong></a>. </p>
+
+<h1>Examples</h1>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td>
+<h2>Traditional sample plot </h2>
+<pre>
+Point & Figure Plot DAX30 (log) 
+--------+-----------------------
+ 7954.90|                      X
+ 7648.94|                      X
+ 7354.75|    X X               X
+ 7071.88|    XOXO            X X
+ 6799.88|    XOXO            XOX
+ 6538.35|    XOXO            XOX
+ 6286.87|X X XO O          X XOX
+ 6045.07|XOXOX  OX X       XOXOX
+ 5812.57|XOXOX  OXOXOX     XOXO 
+ 5589.01| O O   OXOXOXOX X XOX  
+ 5374.05|       O O OXOXOXOXOX  
+ 5167.35|           O OXOXOXO   
+ 4968.61|             OXO O     
+ 4777.51|             O         
+--------+-----------------------
+       Y|22222222222222222222222
+       Y|00000000000000000000000
+       Y|11111111111111111111111
+       Y|00000111111111111111122
+        |                       
+       M|00000000000000000111100
+       M|45678338888889999001147
+        |                       
+       D|00200130111130122000220
+       D|57152512015815527461933
+</pre>
+</td> 
+<td>
+<h2>Modern style plot</h2>
+<img src="sampleplot.png" border="0" alt="Modern style plot sample" />
+</td> 
+</tr>
+</table>
 
 <!-- Start of StatCounter Code for Netscape Composer -->
 <script type="text/javascript">
