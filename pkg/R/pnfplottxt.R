@@ -45,7 +45,7 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
   # cat to connection object
   for (mybox in max(data$boxnumber):min(data$boxnumber)) {
     ### iterate over every line
-    cat(format(round(rpnf:::.box2lower(mybox,boxsize=boxsize,log=log),2),width=8))
+    cat(format(round(rpnf:::.box2lower(mybox,boxsize=boxsize,log=log),2),width=8,nsmall=2))
     cat("|")
     # iterate through columns
     for (column in min(data$column):max(data$column)) {
@@ -75,6 +75,17 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
       } else
         cat(" ")
     } # end column loop
+    # check, if current line is the latest quote
+    if (data$boxnumber[nrow(data)]==mybox) {
+      # write a marker for current box on rhs
+      cat(" <==")
+    } else {
+      # write a marker for current box on rhs
+      cat("    ")
+    }
+    # right hand side 
+    # cat("|")
+    #cat(format(round(rpnf:::.box2lower(mybox,boxsize=boxsize,log=log),2),width=8,nsmall=2))
     # write line feed
     cat("\n")
   }
