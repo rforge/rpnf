@@ -112,12 +112,12 @@ pnfprocessor <- function(
   # now check for style to enhance the result
   if (style == "xo") {
     result <- .xo.signalprocessor(result,reversal)
-    result <- xo.trendline.processor(result)
-    result <- xo.priceobjective.processor(result,reversal,boxsize,log)
+    result <- .xo.trendline.processor(result)
+    result <- .xo.priceobjective.processor(result,reversal,boxsize,log)
   } else if (style == "bp") {
     result <- .bp.signalprocessor(result)
   } else if (style == "rs") {
-    result <- rs.signal.processor(result)
+    result <- .rs.signal.processor(result)
   } else {
     warning("Unknown style detected! No chart enhancements were made!")
   }
@@ -436,23 +436,23 @@ raisingBottom <- function(redData,column) {
   data
 }
 
-#' This function analyzes a (preliminary) P&F Chart for Bullish Support Line and Bearish Resistance Line
-#' 
-#' Finding the appropriate trendlines is explained very good at \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}.
-#' 
-#' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}
-rs.signal.processor <- function(data) {
+# This function analyzes a (preliminary) P&F Chart for Bullish Support Line and Bearish Resistance Line
+# 
+# Finding the appropriate trendlines is explained very good at \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}.
+# 
+# @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}
+.rs.signal.processor <- function(data) {
   warning("This function is not implemented yet!")
   data
   # TODO implement function
 }
 
-#' This function analyzes a (preliminary) P&F Chart for Bullish Support Line and Bearish Resistance Line
-#' 
-#' Finding the appropriate trendlines is explained very good at \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}.
-#' 
-#' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}
-xo.trendline.processor <- function(data, slope=1) {
+# This function analyzes a (preliminary) P&F Chart for Bullish Support Line and Bearish Resistance Line
+# 
+# Finding the appropriate trendlines is explained very good at \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}.
+# 
+# @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:pnf_charts:pnf_trendlines}
+.xo.trendline.processor <- function(data, slope=1) {
   # define local function which determines the slope of the trend lines
   trend.offset <- function(start.column,recent.column) {
     floor((recent.column-start.column)*slope)
@@ -503,11 +503,11 @@ xo.trendline.processor <- function(data, slope=1) {
   data
 }
 
-#' Identifiy for a given P&F Table the current vertical price objective 
-#' triggered by the last signal reversal.
-#' 
-#' 
-currentVPOBreakoutMethod <- function(data,reversal,boxsize,log) {
+# Identifiy for a given P&F Table the current vertical price objective 
+# triggered by the last signal reversal.
+# 
+# 
+.currentVPOBreakoutMethod <- function(data,reversal,boxsize,log) {
   price.objective <- list(boxnumber=NA,price=NA)
   if (nrow(data)>=2) {
     # select only reversal days in data
@@ -550,11 +550,11 @@ currentVPOBreakoutMethod <- function(data,reversal,boxsize,log) {
   price.objective
 }
 
-#' Identifiy for a given P&F Table the current vertical price objective 
-#' triggered by the last signal reversal.
-#' 
-#' 
-currentVPOReversalMethod <- function(data,reversal,boxsize,log) {  
+# Identifiy for a given P&F Table the current vertical price objective 
+# triggered by the last signal reversal.
+# 
+# 
+.currentVPOReversalMethod <- function(data,reversal,boxsize,log) {  
   # define local function to identify price objective column
   getPriceObjectiveColumn <- function(data) {
     price.obj.column <- NA
@@ -629,17 +629,17 @@ currentVPOReversalMethod <- function(data,reversal,boxsize,log) {
   price.objective
 }
 
-#' This function adds Vertical Price Objectives calculated with the
-#' Bullish Breakout and Bearish Breakdown Method (BM) to an P&F Table.
-#' 
-#' Finding the appropriate price objectives is explained very good at 
-#' \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}.
-#' The function adds columns vpo_bm_boxnumber and vpo_bm_price to the given
-#' P&F Table. vpo_bm_bonumber contains the boxnumber of the price objective,
-#' while vpo_bm_price contains the real price objective.
-#' 
-#' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}
-xo.priceobjective.processor <- function(data,reversal,boxsize,log) {
+# This function adds Vertical Price Objectives calculated with the
+# Bullish Breakout and Bearish Breakdown Method (BM) to an P&F Table.
+# 
+# Finding the appropriate price objectives is explained very good at 
+# \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}.
+# The function adds columns vpo_bm_boxnumber and vpo_bm_price to the given
+# P&F Table. vpo_bm_bonumber contains the boxnumber of the price objective,
+# while vpo_bm_price contains the real price objective.
+# 
+# @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}
+.xo.priceobjective.processor <- function(data,reversal,boxsize,log) {
   warning("This function xo.priceobjective.processor() is not fully tested yet!")
   
   # add new column to store vertical price objective for breakout method (BM)
@@ -653,14 +653,14 @@ xo.priceobjective.processor <- function(data,reversal,boxsize,log) {
     # subset current data
     mydata <- data[1:i,]
     # determine vertical price objective with breakout method
-    vert.obj <-  currentVPOBreakoutMethod(data=mydata,
+    vert.obj <-  .currentVPOBreakoutMethod(data=mydata,
                                                      reversal=reversal,
                                                      boxsize=boxsize,
                                                      log=log) 
     data$vpo_bm_boxnumber[i] <- vert.obj$boxnumber
     data$vpo_bm_price[i] <- vert.obj$price
     # determine vertical price objective with breakout method
-    vert.obj <-  currentVPOReversalMethod(data=mydata,
+    vert.obj <-  .currentVPOReversalMethod(data=mydata,
                                           reversal=reversal,
                                           boxsize=boxsize,
                                           log=log) 

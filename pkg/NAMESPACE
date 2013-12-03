@@ -1,3 +1,4 @@
+export(CalcPerformanceMap)
 export(getLogBoxsize)
 export(pnfplot)
 export(pnfplottxt)
