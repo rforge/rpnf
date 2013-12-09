@@ -45,6 +45,7 @@ echo $contents; } ?>
 
 <p> The <strong>project summary page</strong> you can find <a href="http://<?php echo $domain; ?>/projects/<?php echo $group_name; ?>/"><strong>here</strong></a>. </p>
 <p> Download the most <b>recent</b> version of rpnf-package <a href="https://r-forge.r-project.org/R/?group_id=1632"><strong>here</strong></a>. </p>
+<p> The sources for the latest stable version 0.9.4 can be downloaded <a href="rpnf_0.9.4.tar.gz"><strong>here</strong></a>. </p>
 
 <h1>Examples</h1>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
