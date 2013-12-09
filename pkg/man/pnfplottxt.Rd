@@ -2,8 +2,8 @@
 \alias{pnfplottxt}
 \title{Generate a classical TXT point and figure plot.}
 \usage{
-  pnfplottxt(data, reversal = 3, boxsize = 1, log = FALSE,
-    main = NULL, sub = NULL)
+pnfplottxt(data, reversal = 3, boxsize = 1, log = FALSE, main = NULL,
+  sub = NULL)
 }
 \arguments{
   \item{data}{a data frame object containing point and
@@ -20,8 +20,8 @@
   \item{sub}{a string used as a sub title of the chart}
 }
 \description{
-  THIS FUNCTION IS STILL UNDER HEAVY DEVELOPMENT, THEREFORE
-  IT IS SUBJECT TO CHANGE!
+THIS FUNCTION IS STILL UNDER HEAVY DEVELOPMENT, THEREFORE
+IT IS SUBJECT TO CHANGE!
 }
 \examples{
 library(rpnf) # Load rpnf library
@@ -37,11 +37,11 @@ pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
 pnfplot(pnfdata)
 }
 \references{
-  \url{http://rpnf.r-forge.r-project.org}
+\url{http://rpnf.r-forge.r-project.org}
 }
 \seealso{
-  \code{\link{pnfprocessor}}
+\code{\link{pnfprocessor}}
 
-  \code{\link{pnfplot}}
+\code{\link{pnfplot}}
 }
 

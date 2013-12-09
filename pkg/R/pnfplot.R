@@ -1,6 +1,9 @@
 #' Generate a modern point and figure plot
 #' 
 #' @param data a data frame object containing point and figure informations to be plotted
+#' @param reversal number of boxes used in pnfprocessor
+#' @param boxsize the boxsize used in pnfprocessor
+#' @param log are calculations done in logarithmic mode
 #' @param ... any additional options for the plot command
 #' @seealso \code{\link{pnfprocessor}}
 #' @seealso \code{\link{pnfplottxt}}
