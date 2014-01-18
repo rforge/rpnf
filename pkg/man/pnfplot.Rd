@@ -2,7 +2,8 @@
 \alias{pnfplot}
 \title{Generate a modern point and figure plot}
 \usage{
-pnfplot(data, reversal = 3, boxsize = 1, log = FALSE, ...)
+  pnfplot(data, reversal = 3, boxsize = 1, log = FALSE,
+    ...)
 }
 \arguments{
   \item{data}{a data frame object containing point and
@@ -17,7 +18,7 @@ pnfplot(data, reversal = 3, boxsize = 1, log = FALSE, ...)
   \item{...}{any additional options for the plot command}
 }
 \description{
-Generate a modern point and figure plot
+  Generate a modern point and figure plot
 }
 \examples{
 library(rpnf) # Load rpnf library
@@ -33,11 +34,11 @@ pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
 pnfplot(pnfdata)
 }
 \references{
-\url{http://rpnf.r-forge.r-project.org}
+  \url{http://rpnf.r-forge.r-project.org}
 }
 \seealso{
-\code{\link{pnfprocessor}}
+  \code{\link{pnfprocessor}}
 
-\code{\link{pnfplottxt}}
+  \code{\link{pnfplottxt}}
 }
 
