@@ -1,8 +1,26 @@
-# This function converts a given stock quote into an integer boxnumber
-# This function transforms a given quote into an unique integer box number
-.quote2box <- function(quote, boxsize=1, log=FALSE) {
-  if (log & min(quote)<= 0)
-    stop("Error: quote must be greater than 0, if log=TRUE!")
+#' Converts a single or a vector of quotes into integer boxnumbers for P&F-Analysis.
+#' 
+#' @param quote a single quote, or a vector of quotes
+#' @param boxsize single numeric value, used as the boxsize
+#' @param log TRUE, if logarithmic scales should be used
+#' @return a single or a vector of integer boxnumbers
+#' This function transforms a given quote into an unique integer box number
+quote2box <- function(quote, boxsize=1, log=FALSE) {
+  if (!is.numeric(quote)) {
+    stop("Argument quote has to be numeric!")
+  }
+  if (!is.numeric(boxsize)) {
+    stop("Argument boxsize has to be numeric!")
+  }
+  if (!is.logical(log)) {
+    stop("Argument log has to be logical")
+  }
+  if (log & min(quote)<=0) {
+    stop("Argument quotes must be greater than zero, if log=TRUE!")
+  }
+  if (length(boxsize)>1){
+    stop("Argument boxsize is vector of length greater than 1. This is not supported yet!")
+  }
   
   if (log==TRUE) {
     mylog <- function(x) {
@@ -13,9 +31,10 @@
       x
     }
   }
-  
-  as.integer(floor(mylog(quote)/boxsize))
+  result <- as.integer(floor(mylog(quote)/boxsize))
+  result
 }
+
 
 # This function returns the lower bound for a given boxnumber
 .box2lower <- function(boxnumber, boxsize=1, log=FALSE) {
@@ -55,9 +74,9 @@
 # offset should only be used for reversal calculation
 .nextBox <- function(quote,status, boxsize=1, log=FALSE, offset=0) {
   if (status == "X")
-    .box2upper(.quote2box(quote=quote,boxsize=boxsize,log=log)+offset,boxsize=boxsize,log=log)
+    .box2upper(quote2box(quote=quote,boxsize=boxsize,log=log)+offset,boxsize=boxsize,log=log)
   else
-    .box2lower(.quote2box(quote=quote,boxsize=boxsize,log=log)+offset,boxsize=boxsize,log=log)
+    .box2lower(quote2box(quote=quote,boxsize=boxsize,log=log)+offset,boxsize=boxsize,log=log)
 }
 
 # determine next reversal boundary for given value and status
@@ -159,7 +178,7 @@ raisingBottom <- function(redData,column) {
   
   # TODO improve initialization
   status.xo[1] = "X"
-  boxnumber[1] = rpnf:::.quote2box(quote=high[1],boxsize=boxsize,log=log)
+  boxnumber[1] = rpnf:::quote2box(quote=high[1],boxsize=boxsize,log=log)
   status.bs[1] = "Buy"
   nextX[1] = high[1]
   lastNextX[1] = high[1]
@@ -174,7 +193,7 @@ raisingBottom <- function(redData,column) {
       if (high[i] > nextX[i-1]) {
         # we made a new X
         status.xo[i] <- "X"
-        boxnumber[i] = rpnf:::.quote2box(quote=high[i],boxsize=boxsize,log=log)
+        boxnumber[i] = rpnf:::quote2box(quote=high[i],boxsize=boxsize,log=log)
         nextX[i] <- .nextBox(high[i],"X", boxsize=boxsize,log=log)
         lastNextX[i] <- lastNextX[i-1]
         nextO[i] <- .nextReversal(high[i],"X", boxsize=boxsize,log=log)
@@ -187,7 +206,7 @@ raisingBottom <- function(redData,column) {
       } else if (low[i] < nextO[i-1]) {
         # we made a reversal to O
         status.xo[i] <- "O"
-        boxnumber[i] = rpnf:::.quote2box(quote=low[i],boxsize=boxsize,log=log)
+        boxnumber[i] = rpnf:::quote2box(quote=low[i],boxsize=boxsize,log=log)
         nextX[i] <- .nextReversal(low[i],"O", boxsize=boxsize,log=log)
         lastNextX[i] <- nextX[i-1]
         nextO[i] <- .nextBox(low[i],"O", boxsize=boxsize,log=log)
@@ -200,7 +219,7 @@ raisingBottom <- function(redData,column) {
       } else {
         # nothing new happened
         status.xo[i] <- status.xo[i-1]
-        boxnumber[i] = rpnf:::.quote2box(quote=high[i],boxsize=boxsize,log=log)
+        boxnumber[i] = rpnf:::quote2box(quote=high[i],boxsize=boxsize,log=log)
         status.bs[i] <- status.bs[i-1]
         nextX[i] <- nextX[i-1]
         lastNextX[i] <- lastNextX[i-1]
@@ -213,7 +232,7 @@ raisingBottom <- function(redData,column) {
       if (low[i] < nextO[i-1]) {
         # we made a new O
         status.xo[i] <- "O"
-        boxnumber[i] = rpnf:::.quote2box(quote=low[i],boxsize=boxsize,log=log)
+        boxnumber[i] = rpnf:::quote2box(quote=low[i],boxsize=boxsize,log=log)
         nextO[i] <- .nextBox(low[i],"O", boxsize=boxsize,log=log)
         lastNextO[i] <- lastNextO[i-1]
         nextX[i] <- .nextReversal(low[i],"O", boxsize=boxsize,log=log)
@@ -226,7 +245,7 @@ raisingBottom <- function(redData,column) {
       } else if (high[i] > nextX[i-1]) {
         # we made a reversal to X
         status.xo[i] <- "X"
-        boxnumber[i] = rpnf:::.quote2box(quote=high[i],boxsize=boxsize,log=log)
+        boxnumber[i] = rpnf:::quote2box(quote=high[i],boxsize=boxsize,log=log)
         nextO[i] <- .nextReversal(high[i],"X", boxsize=boxsize,log=log)
         lastNextO[i] <- nextO[i-1]
         nextX[i] <- .nextBox(high[i],"X", boxsize=boxsize,log=log)
@@ -239,7 +258,7 @@ raisingBottom <- function(redData,column) {
       } else {
         # nothing new happened
         status.xo[i] <- status.xo[i-1]
-        boxnumber[i] = rpnf:::.quote2box(quote=low[i],boxsize=boxsize,log=log)
+        boxnumber[i] = rpnf:::quote2box(quote=low[i],boxsize=boxsize,log=log)
         status.bs[i] <- status.bs[i-1]
         nextX[i] <- nextX[i-1]
         lastNextX[i] <- lastNextX[i-1]

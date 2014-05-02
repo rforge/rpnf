@@ -70,6 +70,7 @@ pnfprocessor <- function(
 #' @export
 #' @seealso \code{\link{pnfprocessor}}
 #' @references \url{http://rpnf.r-forge.r-project.org}
+#' @import xts
 #' @examples
 #' library(rpnf) # Load rpnf library
 #' library(xts) # Load xts library
