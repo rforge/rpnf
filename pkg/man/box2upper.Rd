@@ -4,6 +4,13 @@
 \usage{
   box2upper(boxnumber, boxsize = 1, log = FALSE)
 }
+\arguments{
+  \item{boxnumber}{An integer boxnumber}
+
+  \item{boxsize}{single numeric value, used as the boxsize}
+
+  \item{log}{TRUE, if logarithmic scales should be used}
+}
 \description{
   Returns the upper bound value for a given boxnumber
 }

@@ -45,7 +45,7 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
   # cat to connection object
   for (mybox in max(data$boxnumber):min(data$boxnumber)) {
     ### iterate over every line
-    cat(format(round(rpnf:::.box2lower(mybox,boxsize=boxsize,log=log),2),width=8,nsmall=2))
+    cat(format(round(box2lower(mybox,boxsize=boxsize,log=log),2),width=8,nsmall=2))
     cat("|")
     # iterate through columns
     for (column in min(data$column):max(data$column)) {
@@ -85,7 +85,7 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
     }
     # right hand side 
     # cat("|")
-    #cat(format(round(rpnf:::.box2lower(mybox,boxsize=boxsize,log=log),2),width=8,nsmall=2))
+    #cat(format(round(box2lower(mybox,boxsize=boxsize,log=log),2),width=8,nsmall=2))
     # write line feed
     cat("\n")
   }

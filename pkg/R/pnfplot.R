@@ -46,11 +46,11 @@ pnfplot <- function(data,reversal=3,boxsize=1,log=FALSE,...) {
   lines(data$date,data$nextO,col="red",lwd=1)
   # plot optional bullish support and bearish resistance lines
   if ("tl.brl.boxnumber" %in% names(data)) {
-    mybsl <- rpnf:::.box2lower(boxnumber=data[,"tl.bsl.boxnumber"],boxsize=boxsize,log=log)
+    mybsl <- box2lower(boxnumber=data[,"tl.bsl.boxnumber"],boxsize=boxsize,log=log)
     lines(data$date,mybsl,col="dark green",lwd=2)
   }
   if ("tl.bsl.boxnumber" %in% names(data)) {
-    mybrl <- rpnf:::.box2upper(boxnumber=data[,"tl.brl.boxnumber"],boxsize=boxsize,log=log)
+    mybrl <- box2upper(boxnumber=data[,"tl.brl.boxnumber"],boxsize=boxsize,log=log)
     lines(data$date,mybrl,col="dark red",lwd=2)
   }
 }

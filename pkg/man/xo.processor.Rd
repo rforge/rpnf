@@ -1,0 +1,40 @@
+\name{xo.processor}
+\alias{xo.processor}
+\title{Determine the XO development of a given time series.}
+\usage{
+  xo.processor(high, low = high, date, reversal = 3L,
+    boxsize = 1, log = FALSE)
+}
+\arguments{
+  \item{high}{}
+
+  \item{low}{}
+
+  \item{date}{}
+
+  \item{reversal}{}
+
+  \item{boxsize}{A single numeric value, indicating the
+  boxsize to be considered.}
+
+  \item{log}{TRUE, if logarithmic scales should be used.}
+}
+\description{
+  This is the main PNF-Workhorse, which transforms a given
+  time series into X and O's. Furthermore it provides
+  already simple Buy/Sell signals, based on checking if the
+  second last colum.
+}
+\examples{
+library(rpnf) # Load rpnf library
+data(GDAXI) # Load some example data
+
+xo.processor(
+ high=GDAXI$High,
+ low=GDAXI$Low,
+ date=GDAXI$Date,
+ reversal=3L,
+ boxsize=1,
+ log=TRUE)
+}
+
