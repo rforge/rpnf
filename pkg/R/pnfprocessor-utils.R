@@ -35,9 +35,8 @@ quote2box <- function(quote, boxsize=1, log=FALSE) {
   result
 }
 
-
-# This function returns the lower bound for a given boxnumber
-.box2lower <- function(boxnumber, boxsize=1, log=FALSE) {
+#' Returns the lower bound value for a given boxnumber
+box2lower <- function(boxnumber, boxsize=1, log=FALSE) {
   if(sum(floor(boxnumber)!=boxnumber,na.rm=T)>0)
     stop("Error: Only integer values allowed as boxnumber!")
   if (log==TRUE) {
@@ -53,8 +52,8 @@ quote2box <- function(quote, boxsize=1, log=FALSE) {
   myexp(boxnumber*boxsize)
 }
 
-# This function returns the upper bound for a given boxnumber
-.box2upper <- function(boxnumber, boxsize=1, log=FALSE) {
+#' Returns the upper bound value for a given boxnumber
+box2upper <- function(boxnumber, boxsize=1, log=FALSE) {
   if(sum(floor(boxnumber)!=boxnumber,na.rm=T)>0)
     stop("Error: Only integer values allowed as boxnumber!")
   if (log==TRUE) {
@@ -70,21 +69,44 @@ quote2box <- function(quote, boxsize=1, log=FALSE) {
   myexp((boxnumber+1)*boxsize)
 }
 
-# determine next box boundary for given value and status
-# offset should only be used for reversal calculation
-.nextBox <- function(quote,status, boxsize=1, log=FALSE, offset=0) {
+#' Determine the next box frontier for current quote(s) given a recent XO-status.
+#' 
+#' Note: offset should only be used for reversal calculation
+#' @param quote  A single quote or a vector of quotes.
+#' @param status A single character indicating the current XO-status.
+#' @param boxsize A single numeric value, indicating the boxsize to be considered.
+#' @param log TRUE, if logarithmic scales should be used.
+#' @param offset A numeric value 
+nextBox <- function(quote,status, boxsize=1, log=FALSE, offset=0) {
+  if (!(is.numeric(quote))) {
+    stop("Argument quote has to be numeric!")
+  }
+  # FIXME add check for string length == 1
+  if (!(is.character(status) & nchar(status)==1 )) {
+    stop("Argument status has to be a character and of length 1!")
+  }
+  if (!(is.numeric(boxsize) & length(boxsize)==1)) {
+    stop("Argument boxsize has to be numeric and of length 1!")
+  }
+  if(!(is.logical(log) & length(log))) {
+    stop("Argument log has to be logical and of length 1!")
+  }
+  if (!(is.numeric(offset) & length(offset)==1)) {
+    stop("Argument offset has to be numeric and of length 1!")
+  }
+  
   if (status == "X")
-    .box2upper(quote2box(quote=quote,boxsize=boxsize,log=log)+offset,boxsize=boxsize,log=log)
-  else
-    .box2lower(quote2box(quote=quote,boxsize=boxsize,log=log)+offset,boxsize=boxsize,log=log)
+    box2upper(quote2box(quote=quote,boxsize=boxsize,log=log)+offset,boxsize=boxsize,log=log)
+  else 
+    box2lower(quote2box(quote=quote,boxsize=boxsize,log=log)+offset,boxsize=boxsize,log=log)
 }
 
 # determine next reversal boundary for given value and status
-.nextReversal <- function(quote,status, reversal=3, boxsize=1, log=FALSE) {
+nextReversal <- function(quote,status, reversal=3, boxsize=1, log=FALSE) {
   if (status == "X")
-    return (.nextBox(quote, "O", boxsize=boxsize,log=log, offset=-reversal+1))
+    return (nextBox(quote, "O", boxsize=boxsize,log=log, offset=-reversal+1))
   else
-    return (.nextBox(quote, "X", boxsize=boxsize,log=log, offset=reversal-1))
+    return (nextBox(quote, "X", boxsize=boxsize,log=log, offset=reversal-1))
 }
 
 # returns the maximum box number in given column
@@ -194,9 +216,9 @@ raisingBottom <- function(redData,column) {
         # we made a new X
         status.xo[i] <- "X"
         boxnumber[i] = rpnf:::quote2box(quote=high[i],boxsize=boxsize,log=log)
-        nextX[i] <- .nextBox(high[i],"X", boxsize=boxsize,log=log)
+        nextX[i] <- nextBox(high[i],"X", boxsize=boxsize,log=log)
         lastNextX[i] <- lastNextX[i-1]
-        nextO[i] <- .nextReversal(high[i],"X", boxsize=boxsize,log=log)
+        nextO[i] <- nextReversal(high[i],"X", boxsize=boxsize,log=log)
         lastNextO[i] <- lastNextO[i-1]
         column[i] = column[i-1]
         if (high[i] > lastNextX[i-1])
@@ -207,9 +229,9 @@ raisingBottom <- function(redData,column) {
         # we made a reversal to O
         status.xo[i] <- "O"
         boxnumber[i] = rpnf:::quote2box(quote=low[i],boxsize=boxsize,log=log)
-        nextX[i] <- .nextReversal(low[i],"O", boxsize=boxsize,log=log)
+        nextX[i] <- nextReversal(low[i],"O", boxsize=boxsize,log=log)
         lastNextX[i] <- nextX[i-1]
-        nextO[i] <- .nextBox(low[i],"O", boxsize=boxsize,log=log)
+        nextO[i] <- nextBox(low[i],"O", boxsize=boxsize,log=log)
         lastNextO[i] <- lastNextO[i-1]
         column[i] = column[i-1]+1
         if (low[i] < lastNextO[i-1])
@@ -233,9 +255,9 @@ raisingBottom <- function(redData,column) {
         # we made a new O
         status.xo[i] <- "O"
         boxnumber[i] = rpnf:::quote2box(quote=low[i],boxsize=boxsize,log=log)
-        nextO[i] <- .nextBox(low[i],"O", boxsize=boxsize,log=log)
+        nextO[i] <- nextBox(low[i],"O", boxsize=boxsize,log=log)
         lastNextO[i] <- lastNextO[i-1]
-        nextX[i] <- .nextReversal(low[i],"O", boxsize=boxsize,log=log)
+        nextX[i] <- nextReversal(low[i],"O", boxsize=boxsize,log=log)
         lastNextX[i] <- lastNextX[i-1]
         column[i] = column[i-1]
         if (low[i] < lastNextO[i-1])
@@ -246,9 +268,9 @@ raisingBottom <- function(redData,column) {
         # we made a reversal to X
         status.xo[i] <- "X"
         boxnumber[i] = rpnf:::quote2box(quote=high[i],boxsize=boxsize,log=log)
-        nextO[i] <- .nextReversal(high[i],"X", boxsize=boxsize,log=log)
+        nextO[i] <- nextReversal(high[i],"X", boxsize=boxsize,log=log)
         lastNextO[i] <- nextO[i-1]
-        nextX[i] <- .nextBox(high[i],"X", boxsize=boxsize,log=log)
+        nextX[i] <- nextBox(high[i],"X", boxsize=boxsize,log=log)
         lastNextX[i] <- lastNextX[i-1]
         column[i] = column[i-1]+1
         if (high[i] > lastNextX[i-1])
@@ -499,11 +521,11 @@ raisingBottom <- function(redData,column) {
       if (current.status=="Buy") {
         boxnumber <- min.boxnumber + (max.boxnumber-min.boxnumber+1)*reversal
         # translate price.objective.box into real number
-        price <- rpnf:::.box2lower(boxnumber=boxnumber,boxsize=boxsize,log=log)
+        price <- rpnf:::box2lower(boxnumber=boxnumber,boxsize=boxsize,log=log)
       } else if (current.status=="Sell") {
         boxnumber <- max.boxnumber - (max.boxnumber-min.boxnumber+1)*(reversal-1)
         # translate price.objective.box into real number
-        price <- rpnf:::.box2upper(boxnumber=boxnumber,boxsize=boxsize,log=log)
+        price <- rpnf:::box2upper(boxnumber=boxnumber,boxsize=boxsize,log=log)
       } else {
         # should not happen
         stop("Internal error in .currentVerticalPriceObjective()!")
@@ -558,11 +580,11 @@ raisingBottom <- function(redData,column) {
     if (data$status.bs[nrow(data)]=="Buy") {
       boxnumber <- min.boxnumber + (max.boxnumber-min.boxnumber+1)*reversal
       # translate price.objective.box into real number
-      price <- .box2lower(boxnumber=boxnumber,boxsize=boxsize,log=log)
+      price <- box2lower(boxnumber=boxnumber,boxsize=boxsize,log=log)
     } else if (data$status.bs[nrow(data)]=="Sell") {
       boxnumber <- max.boxnumber - (max.boxnumber-min.boxnumber+1)*(reversal-1)
       # translate price.objective.box into real number
-      price <- .box2upper(boxnumber=boxnumber,boxsize=boxsize,log=log)
+      price <- box2upper(boxnumber=boxnumber,boxsize=boxsize,log=log)
     } else {
       # should not happen
       stop("Internal Error!")

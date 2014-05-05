@@ -1,4 +1,4 @@
-context(desc="Test boxsize functions")
+context(desc="Test getLogBoxsize() function")
 
 test_that(desc="Test, if getLogBoxsize throws errors/warnings on wrong arguments",
 {
