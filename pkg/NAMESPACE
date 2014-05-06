@@ -1,7 +1,5 @@
 export(getLogBoxsize)
-export(xo.processor)
 export(pnfplot)
 export(pnfplottxt)
 export(pnfprocessor)
-export(pnfprocessor.xts)
-import(xts)
+export(xo.processor)

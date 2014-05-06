@@ -11,6 +11,9 @@
   \item{status}{A single character indicating the current
   XO-status.}
 
+  \item{reversal}{number of boxes needed to make a
+  reversal}
+
   \item{boxsize}{A single numeric value, indicating the
   boxsize to be considered.}
 
