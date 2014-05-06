@@ -42,7 +42,7 @@ pnfprocessor <- function(
   result <- xo.processor(high,low,date,reversal,boxsize,log)
   # now check for style to enhance the result
   if (style == "xo") {
-    result <- .xo.signalprocessor(result,reversal)
+    result <- xo.signalprocessor(result,reversal)
     result <- .xo.trendline.processor(result)
     result <- .xo.priceobjective.processor(result,reversal,boxsize,log)
   } else if (style == "bp") {

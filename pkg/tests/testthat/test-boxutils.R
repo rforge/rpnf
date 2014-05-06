@@ -192,7 +192,7 @@ test_that(desc="Test, if speed of xo.processor() is sufficent",
   }
   times.long <- system.time(xo.processor(high=myts, low=myts,date=seq(1:length),boxsize=getLogBoxsize(1),log=T))
   
-  expect_less_than(object=times.long[1],expected=(myfactor+2)*times.short[1])
+  expect_less_than(object=times.long[1],expected=(2*myfactor)*times.short[1])
 })
 
 test_that(desc="Test, if xo.processor() produces correct output",

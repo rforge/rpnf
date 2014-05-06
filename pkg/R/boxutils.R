@@ -171,6 +171,7 @@ nextReversal <- function(quote,status, reversal=3, boxsize=1, log=FALSE) {
 #' @param boxsize A single numeric value, indicating the boxsize to be considered.
 #' @param log TRUE, if logarithmic scales should be used.
 #' @export
+#' @keywords internal
 #' @examples
 #' library(rpnf) # Load rpnf library
 #' data(GDAXI) # Load some example data

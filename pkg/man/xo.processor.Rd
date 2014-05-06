@@ -37,4 +37,5 @@ xo.processor(
  boxsize=1,
  log=TRUE)
 }
+\keyword{internal}
 

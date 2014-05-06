@@ -59,7 +59,8 @@ raisingBottom <- function(redData,column) {
     return (FALSE)
 }
 
-.xo.signalprocessor <- function(data, reversal=3) {
+# FIXME write comments
+xo.signalprocessor <- function(data, reversal=3) {
   # check for needed columns
   if (!"boxnumber" %in% names(data))
     stop("column 'boxnumber' is missing!")
