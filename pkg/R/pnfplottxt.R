@@ -27,6 +27,13 @@
 #' pnfplot(pnfdata)
 
 pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
+  # Check if warning level is set to zero, otherwise output will be messy
+  old.waring.level <- getOption("warn")
+  if (old.waring.level>0) {
+    warning("Warning level > 0. This would produce a messy plot. Reset option(warn)=0 temporally!")
+    options(warn=0)
+  }
+  
   ## local function definiton: plot seperation line
   plotSeperationLine <- function(numOfColumns) {
     # iterate through columns
@@ -108,5 +115,11 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
         cat(substr(as.character(min(data$date[data$column==column])),start=pos,stop=pos))
     }
     cat("\n")
+  }
+
+  # restore default options
+  if (old.waring.level>0) {
+    warning("Restoring old warning level!")
+    options(warn=old.waring.level)
   }
 }
