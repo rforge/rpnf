@@ -39,7 +39,7 @@ pnfprocessor <- function(
     stop("Select a proper chart style: 'xo', 'rs' or'bp'!")
   }
   # first execute basic time series processing
-  result <- xo.processor(high,low,date,reversal,boxsize,log)
+  result <- xo.processor(high=high,low=low,date=date,reversal=reversal,boxsize=boxsize,log=log)
   # now check for style to enhance the result
   if (style == "xo") {
     result <- xo.signalprocessor(result,reversal)

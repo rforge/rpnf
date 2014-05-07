@@ -153,7 +153,13 @@ nextBox <- function(quote,status, boxsize=1, log=FALSE, offset=0) {
 #' @param reversal number of boxes needed to make a reversal 
 #' @param boxsize A single numeric value, indicating the boxsize to be considered.
 #' @param log TRUE, if logarithmic scales should be used.
-nextReversal <- function(quote,status, reversal=3, boxsize=1, log=FALSE) {
+nextReversal <- function(quote,status, reversal=3L, boxsize=1, log=FALSE) {
+  if (!(is.numeric(quote))) {
+    stop("Argument quote has to be numeric!")
+  }
+  if (!(is.character(status) & nchar(status)==1)) {
+    stop("Argument status has to be a character and of length 1!")
+  }
   if (status == "X")
     return (nextBox(quote, "O", boxsize=boxsize,log=log, offset=-reversal+1))
   else
@@ -202,7 +208,7 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
     stop("Arguments high and date have to have the same length!")
   }
   if (!(is.numeric(reversal) & length(reversal)==1)) {
-    stop("Argument reversal has to be numeric, and of length 1 exactly!")
+    stop("Argument reversal has to be integer, and of length 1 exactly!")
   }
   if (!(is.integer(reversal) & min(reversal)>0)) {
     stop("Argument reversal has to be integer greater than zero!")
@@ -226,7 +232,7 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
   
   # TODO improve initialization
   status.xo[1] = "X"
-  boxnumber[1] = rpnf:::quote2box(quote=high[1],boxsize=boxsize,log=log)
+  boxnumber[1] = quote2box(quote=high[1],boxsize=boxsize,log=log)
   status.bs[1] = "Buy"
   nextX[1] = high[1]
   lastNextX[1] = high[1]
@@ -241,10 +247,10 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
       if (high[i] > nextX[i-1]) {
         # we made a new X
         status.xo[i] <- "X"
-        boxnumber[i] = rpnf:::quote2box(quote=high[i],boxsize=boxsize,log=log)
+        boxnumber[i] = quote2box(quote=high[i],boxsize=boxsize,log=log)
         nextX[i] <- nextBox(high[i],"X", boxsize=boxsize,log=log)
         lastNextX[i] <- lastNextX[i-1]
-        nextO[i] <- nextReversal(high[i],"X", boxsize=boxsize,log=log)
+        nextO[i] <- nextReversal(quote=high[i],status="X",reversal=reversal,boxsize=boxsize,log=log)
         lastNextO[i] <- lastNextO[i-1]
         column[i] = column[i-1]
         if (high[i] > lastNextX[i-1])
@@ -254,8 +260,8 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
       } else if (low[i] < nextO[i-1]) {
         # we made a reversal to O
         status.xo[i] <- "O"
-        boxnumber[i] = rpnf:::quote2box(quote=low[i],boxsize=boxsize,log=log)
-        nextX[i] <- nextReversal(low[i],"O", boxsize=boxsize,log=log)
+        boxnumber[i] = quote2box(quote=low[i],boxsize=boxsize,log=log)
+        nextX[i] <- nextReversal(low[i],"O",reversal=reversal,boxsize=boxsize,log=log)
         lastNextX[i] <- nextX[i-1]
         nextO[i] <- nextBox(low[i],"O", boxsize=boxsize,log=log)
         lastNextO[i] <- lastNextO[i-1]
@@ -267,7 +273,7 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
       } else {
         # nothing new happened
         status.xo[i] <- status.xo[i-1]
-        boxnumber[i] = rpnf:::quote2box(quote=high[i],boxsize=boxsize,log=log)
+        boxnumber[i] = quote2box(quote=high[i],boxsize=boxsize,log=log)
         status.bs[i] <- status.bs[i-1]
         nextX[i] <- nextX[i-1]
         lastNextX[i] <- lastNextX[i-1]
@@ -280,10 +286,10 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
       if (low[i] < nextO[i-1]) {
         # we made a new O
         status.xo[i] <- "O"
-        boxnumber[i] = rpnf:::quote2box(quote=low[i],boxsize=boxsize,log=log)
+        boxnumber[i] = quote2box(quote=low[i],boxsize=boxsize,log=log)
         nextO[i] <- nextBox(low[i],"O", boxsize=boxsize,log=log)
         lastNextO[i] <- lastNextO[i-1]
-        nextX[i] <- nextReversal(low[i],"O", boxsize=boxsize,log=log)
+        nextX[i] <- nextReversal(low[i],"O",reversal=reversal,boxsize=boxsize,log=log)
         lastNextX[i] <- lastNextX[i-1]
         column[i] = column[i-1]
         if (low[i] < lastNextO[i-1])
@@ -293,8 +299,8 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
       } else if (high[i] > nextX[i-1]) {
         # we made a reversal to X
         status.xo[i] <- "X"
-        boxnumber[i] = rpnf:::quote2box(quote=high[i],boxsize=boxsize,log=log)
-        nextO[i] <- nextReversal(high[i],"X", boxsize=boxsize,log=log)
+        boxnumber[i] = quote2box(quote=high[i],boxsize=boxsize,log=log)
+        nextO[i] <- nextReversal(high[i],"X",reversal=reversal,boxsize=boxsize,log=log)
         lastNextO[i] <- nextO[i-1]
         nextX[i] <- nextBox(high[i],"X", boxsize=boxsize,log=log)
         lastNextX[i] <- lastNextX[i-1]
@@ -306,7 +312,7 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
       } else {
         # nothing new happened
         status.xo[i] <- status.xo[i-1]
-        boxnumber[i] = rpnf:::quote2box(quote=low[i],boxsize=boxsize,log=log)
+        boxnumber[i] = quote2box(quote=low[i],boxsize=boxsize,log=log)
         status.bs[i] <- status.bs[i-1]
         nextX[i] <- nextX[i-1]
         lastNextX[i] <- lastNextX[i-1]

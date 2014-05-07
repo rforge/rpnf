@@ -149,6 +149,14 @@ test_that(desc="Test, if nextBox() produces appropriate values",
   expect_equal(object=nextReversal(45.99999,"O",boxsize=0.5),expected=47)
   expect_equal(object=nextReversal(46.0,"O",boxsize=0.5),expected=47.5)
   expect_equal(object=nextReversal(46.00001,"O",boxsize=0.5),expected=47.5)
+
+  # check another reversal number
+  expect_equal(object=nextReversal(45.99999,"X",reversal=1,boxsize=1),expected=45)
+  expect_equal(object=nextReversal(46.0,"X",reversal=1,boxsize=1),expected=46)
+  expect_equal(object=nextReversal(46.00001,"X",reversal=1,boxsize=1),expected=46)
+  expect_equal(object=nextReversal(45.99999,"O",reversal=1,boxsize=1),expected=46)
+  expect_equal(object=nextReversal(46.0,"O",reversal=1,boxsize=1),expected=47)
+  expect_equal(object=nextReversal(46.00001,"O",reversal=1,boxsize=1),expected=47)
   
 })
 

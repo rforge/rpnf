@@ -2,7 +2,7 @@
 \alias{nextReversal}
 \title{Determine the next reversal frontier for current quote(s) given a recent XO-status.}
 \usage{
-  nextReversal(quote, status, reversal = 3, boxsize = 1,
+  nextReversal(quote, status, reversal = 3L, boxsize = 1,
     log = FALSE)
 }
 \arguments{

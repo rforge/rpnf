@@ -287,11 +287,11 @@ xo.signalprocessor <- function(data, reversal=3) {
       if (current.status=="Buy") {
         boxnumber <- min.boxnumber + (max.boxnumber-min.boxnumber+1)*reversal
         # translate price.objective.box into real number
-        price <- rpnf:::box2lower(boxnumber=boxnumber,boxsize=boxsize,log=log)
+        price <- box2lower(boxnumber=boxnumber,boxsize=boxsize,log=log)
       } else if (current.status=="Sell") {
         boxnumber <- max.boxnumber - (max.boxnumber-min.boxnumber+1)*(reversal-1)
         # translate price.objective.box into real number
-        price <- rpnf:::box2upper(boxnumber=boxnumber,boxsize=boxsize,log=log)
+        price <- box2upper(boxnumber=boxnumber,boxsize=boxsize,log=log)
       } else {
         # should not happen
         stop("Internal error in .currentVerticalPriceObjective()!")

@@ -1,8 +1,8 @@
 Package: rpnf
 Type: Package
 Title: Point and Figure Library
-Version: 1.0.0-1
-Date: 2014-05-06
+Version: 1.0.1
+Date: 2014-05-07
 Author: Sascha M. Herrmann
 Maintainer: Sascha M. Herrmann <sascha.martin.herrmann@gmail.com>
 Description: The R Point & Figure Library is a tool set to create and analyze
