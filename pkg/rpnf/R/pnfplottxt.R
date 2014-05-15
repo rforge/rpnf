@@ -71,8 +71,10 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
       if ("tl.brl.boxnumber" %in% names(data) | "tl.bsl.boxnumber" %in% names(data)) {
 #        trendline <- c(min(data[data$column==column, c("tl.brl.boxnumber","tl.bsl.boxnumber")],na.rm=T),
 #                       max(data[data$column==column, c("tl.brl.boxnumber","tl.bsl.boxnumber")],na.rm=T))
+        # FIXME this is a bottleneck
         trendline <- unique(data[data$column==column, c("tl.brl.boxnumber","tl.bsl.boxnumber")])
       }
+      # FIXME this is a bottleneck
       warning(paste("column=",column,"; trendline=",trendline))
       # decide on plot
       if (mymin<=mybox & mybox<=mymax) {

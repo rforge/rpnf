@@ -42,13 +42,13 @@ pnfprocessor <- function(
   result <- xo.processor(high=high,low=low,date=date,reversal=reversal,boxsize=boxsize,log=log)
   # now check for style to enhance the result
   if (style == "xo") {
-    result <- xo.signalprocessor(result,reversal)
-    result <- .xo.trendline.processor(result)
-    result <- .xo.priceobjective.processor(result,reversal,boxsize,log)
+    result <- xo.signalprocessor(result,reversal) # 1.2 sec
+    result <- xo.trendline.processor(result) # 0.25 sec
+    result <- xo.priceobjective.processor(result,reversal,boxsize,log) # 2.2 sec
   } else if (style == "bp") {
-    result <- .bp.signalprocessor(result)
+    result <- bp.signalprocessor(result)
   } else if (style == "rs") {
-    result <- .rs.signal.processor(result)
+    result <- rs.signal.processor(result)
   } else {
     warning("Unknown style detected! No chart enhancements were made!")
   }
