@@ -1,8 +1,9 @@
 #' This function adds Vertical Price Objectives calculated with the
 #' Bullish Breakout and Bearish Breakdown Method (BM) to an P&F Table.
 #' 
-#' Finding the appropriate price objectives is explained very good at 
-#' \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}.
+#' Finding the appropriate price objectives has been explained very good at 
+#' http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri, 
+#' but this documentation is no longer available.
 #' The function adds columns vpo_bm_boxnumber and vpo_bm_price to the given
 #' P&F Table. vpo_bm_bonumber contains the boxnumber of the price objective,
 #' while vpo_bm_price contains the real price objective.
@@ -12,7 +13,6 @@
 #' @param boxsize Size of one box
 #' @param log Use logarithmic scale
 #'
-#' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}
 xo.priceobjective.processor <- function(data,reversal,boxsize,log) {
   # add new column to store vertical price objective for breakout method (BM)
   data$vpo_bm_boxnumber <- rep(NA,times=nrow(data))
