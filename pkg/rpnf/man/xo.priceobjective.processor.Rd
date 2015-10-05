@@ -17,13 +17,11 @@ xo.priceobjective.processor(data, reversal, boxsize, log)
 \item{log}{Use logarithmic scale}
 }
 \description{
-Finding the appropriate price objectives is explained very good at
-\url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}.
+Finding the appropriate price objectives has been explained very good at
+http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri,
+but this documentation is no longer available.
 The function adds columns vpo_bm_boxnumber and vpo_bm_price to the given
 P&F Table. vpo_bm_bonumber contains the boxnumber of the price objective,
 while vpo_bm_price contains the real price objective.
-}
-\seealso{
-\url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}
 }
 

@@ -8,6 +8,7 @@ Maintainer: Sascha M. Herrmann <sascha.martin.herrmann@gmail.com>
 Description: The R Point & Figure Library is a tool set to create and analyze
     Point & Figure Charts for given time series or data frame objects.
 License: GPL-3
+Depends: R (>= 3.0.0)
 Suggests:
     testthat
 Collate:
