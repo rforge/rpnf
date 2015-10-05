@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^Rlib-dev$
 ^pkg$
+^cran-comments.md$
