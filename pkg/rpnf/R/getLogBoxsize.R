@@ -6,6 +6,7 @@
 #' @return a numeric value which is equivalent to the percental change given on a logarithmic scale
 #' @export
 #' @examples
+#' \dontrun{
 #' # apply it with pnfprocessor
 #' library(rpnf) # Load rpnf library
 #' data(GDAXI) # Load some example data
@@ -19,7 +20,7 @@
 #'  date=GDAXI$Date,
 #'  boxsize=getLogBoxsize(percent=1),
 #'  log=TRUE)
-#'
+#' }
 getLogBoxsize <- function(percent) {
   if (!is.numeric(percent)) {
     stop("Argument percent has to be numeric!")

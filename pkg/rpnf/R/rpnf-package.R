@@ -5,10 +5,9 @@
 #' \tabular{ll}{
 #' Package: \tab rpnf\cr
 #' Type: \tab Package\cr
-#' Version: \tab 0.9.1\cr
-#' Date: \tab 2013-04-19\cr
+#' Version: \tab 1.0.2\cr
+#' Date: \tab 2015-10-05\cr
 #' License: \tab GPL-3\cr
-#' Built: \tab R 2.15.3; ; 2013-04-15 07:37:11 UTC; windows\cr
 #' }
 #' 
 #' @name rpnf-package
@@ -25,6 +24,7 @@
 #' @seealso \code{\link{pnfplot}}
 #' @seealso \code{\link{pnfplottxt}}
 #' @examples
+#' \dontrun{
 #' ### Initialize library
 #' library(rpnf) # Load rpnf library
 #' data(GDAXI) # Load some example data
@@ -49,6 +49,7 @@
 #' pnfplot(symbol.pnf,main="P&F Plot GDAXI (linear)")
 #' # Or in the old TXT style
 #' pnfplottxt(symbol.pnf,boxsize=100L,log=FALSE,main="P&F Plot GDAXI (linear)")
+#' 
 #' 
 #' ### Second example: logarithmc example
 #' # For most stocks and indices it is useful
@@ -80,4 +81,5 @@
 #' # - and many others 
 #' # can be found in your local package library directory.
 #' # Search for rpnf-example1.R, rpnf-example2.R and rpnf-example3.R.
+#' }
 NULL

@@ -168,17 +168,17 @@ test_that(desc="Test, if xo.processor() throws errors/warnings on wrong argument
   expect_error(object=xo.processor())
 })
 
-test_that(desc="Test, if speed of xo.processor() is sufficent",
-{
-  data(GDAXI)
-  times <- system.time(xo.processor(high=GDAXI$High, low=GDAXI$Low,date=GDAXI$Date))
-  warning(paste0("Timings of xo.processor() for linear charts: ",times[1]," sec."))
-  expect_less_than(object=times[1],expected=0.15)
-  
-  times <- system.time(xo.processor(high=GDAXI$High, low=GDAXI$Low,date=GDAXI$Date,boxsize=getLogBoxsize(1),log=T))
-  warning(paste0("Timings of xo.processor() for logarithmic charts: ",times[1]," sec."))
-  expect_less_than(object=times[1],expected=0.15)
-})
+# test_that(desc="Test, if speed of xo.processor() is sufficent",
+# {
+#   data(GDAXI)
+#   times <- system.time(xo.processor(high=GDAXI$High, low=GDAXI$Low,date=GDAXI$Date))
+#   warning(paste0("Timings of xo.processor() for linear charts: ",times[1]," sec."))
+#   expect_less_than(object=times[1],expected=0.15)
+#   
+#   times <- system.time(xo.processor(high=GDAXI$High, low=GDAXI$Low,date=GDAXI$Date,boxsize=getLogBoxsize(1),log=T))
+#   warning(paste0("Timings of xo.processor() for logarithmic charts: ",times[1]," sec."))
+#   expect_less_than(object=times[1],expected=0.15)
+# })
 
   test_that(desc="Test, if speed of xo.processor() scales nearly linear in input size",
 {

@@ -1,4 +1,6 @@
 #' This function identifies chart signals in an [0,100]-Points Bullish Percent Chart
+#'
+#' @param data Input data
 bp.signalprocessor <- function(data) {
   for (i in 1:nrow(data)) {
     if (data$status.xo[i]=="X") {

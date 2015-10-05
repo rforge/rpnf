@@ -1,5 +1,7 @@
 #' Analyzes a given PNF time-series for Buy&Sell patterns
 #' 
+#' @param data Input data
+#' @param reversal Number of boxes for reversal
 xo.signalprocessor <- function(data, reversal=3) {
   # check for needed columns
   if (!"boxnumber" %in% names(data))

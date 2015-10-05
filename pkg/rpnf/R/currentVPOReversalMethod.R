@@ -1,6 +1,10 @@
 #' Identifiy for a given P&F Table the current vertical price objective 
 #' triggered by the last signal reversal.
 #' 
+#' @param data Input data
+#' @param reversal Number of boxes for reversal
+#' @param boxsize Size of one box
+#' @param log Use logarithmic scale
 currentVPOReversalMethod <- function(data,reversal,boxsize,log) {  
   # define local function to identify price objective column
   getPriceObjectiveColumn <- function(data) {

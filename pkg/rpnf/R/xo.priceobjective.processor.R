@@ -7,6 +7,11 @@
 #' P&F Table. vpo_bm_bonumber contains the boxnumber of the price objective,
 #' while vpo_bm_price contains the real price objective.
 #' 
+#' @param data Input data
+#' @param reversal Number of boxes for reversal
+#' @param boxsize Size of one box
+#' @param log Use logarithmic scale
+#'
 #' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}
 xo.priceobjective.processor <- function(data,reversal,boxsize,log) {
   # add new column to store vertical price objective for breakout method (BM)

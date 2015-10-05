@@ -10,6 +10,7 @@
 #' @references \url{http://rpnf.r-forge.r-project.org}
 #' @export
 #' @examples
+#' \dontrun{
 #' library(rpnf) # Load rpnf library
 #' data(GDAXI) # Load some example data
 #' pnfdata <- pnfprocessor(
@@ -21,14 +22,17 @@
 #' tail(pnfdata)
 #' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
 #' pnfplot(pnfdata)
-
+#' }
 pnfplot <- function(data,reversal=3,boxsize=1,log=FALSE,...) {
   if (length(intersect(names(data),c("date","nextO","nextX","status.xo","status.bs","high","low")))!=7)
     stop(paste("input data frame must contain columns ",c("date","nextO","nextX","status.xo","status.bs","high","low"),"!"))
   # determine boundaries
-  xlim <- c(min(data$date),max(data$date))
+  xlim <- as.Date(c(min(data$date),max(data$date)))
   ylim <- c(min(data$nextO),max(data$nextX))
-  plot(NULL,NULL,xlim=xlim,ylim=ylim,...)
+  plot(NULL,NULL,xlim=xlim,ylim=ylim,xlab="",ylab="",xaxt='n',...)
+  axis.Date(1, at = seq(from = xlim[1], to = xlim[2], length.out=25),
+            labels = seq(from = xlim[1], to = xlim[2], length.out=25),
+            format= "%Y-%m-%d", las = 2)
   # plot X values with pch=4
   index.XB <- data$status.xo=="X"&data$status.bs=="Buy"
   index.XS <- data$status.xo=="X"&data$status.bs=="Sell"

@@ -15,6 +15,7 @@
 #' @seealso \code{\link{pnfplottxt}}
 #' @references \url{http://rpnf.r-forge.r-project.org}
 #' @examples
+#' \dontrun{
 #' library(rpnf) # Load rpnf library
 #' data(GDAXI) # Load some example data
 #' pnfdata <- pnfprocessor(
@@ -26,6 +27,7 @@
 #' tail(pnfdata)
 #' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
 #' pnfplot(pnfdata)
+#' }
 pnfprocessor <- function(
   high,
   low=high,

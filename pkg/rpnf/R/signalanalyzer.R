@@ -1,4 +1,7 @@
 #' analyze transitions of signal states
+#'
+#' @param signal Signal to identify
+#' @param probability Report probability
 signalanalyzer <- function(signal,probability=TRUE) {
   t2<-table(signal[1:(length(signal)-1)],signal[2:length(signal)])
   t2m<-as.matrix(t2)

@@ -1,6 +1,10 @@
 #' Identifiy for a given P&F Table the current vertical price objective 
 #' triggered by the last signal reversal.
 #' 
+#' @param data Input data
+#' @param reversal Number of boxes for reversal
+#' @param boxsize Size of one box
+#' @param log Use logarithmic scale
 currentVPOBreakoutMethod <- function(data,reversal,boxsize,log) {
   price.objective <- list(boxnumber=NA,price=NA)
   if (nrow(data)>=2) {

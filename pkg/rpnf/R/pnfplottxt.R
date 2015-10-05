@@ -14,6 +14,7 @@
 #' @references \url{http://rpnf.r-forge.r-project.org}
 #' @export
 #' @examples
+#' \dontrun{
 #' library(rpnf) # Load rpnf library
 #' data(GDAXI) # Load some example data
 #' pnfdata <- pnfprocessor(
@@ -25,7 +26,7 @@
 #' tail(pnfdata)
 #' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
 #' pnfplot(pnfdata)
-
+#' }
 pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
   # Check if warning level is set to zero, otherwise output will be messy
   old.waring.level <- getOption("warn")
