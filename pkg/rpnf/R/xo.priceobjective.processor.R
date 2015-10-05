@@ -9,8 +9,6 @@
 #' 
 #' @seealso \url{http://stockcharts.com/school/doku.php?id=chart_school:chart_analysis:point_and_figure_pri}
 xo.priceobjective.processor <- function(data,reversal,boxsize,log) {
-  warning("This function xo.priceobjective.processor() is not fully tested yet!")
-  
   # add new column to store vertical price objective for breakout method (BM)
   data$vpo_bm_boxnumber <- rep(NA,times=nrow(data))
   data$vpo_bm_price <- rep(NA,times=nrow(data))

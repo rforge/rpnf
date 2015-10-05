@@ -75,7 +75,6 @@ pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
         trendline <- unique(data[data$column==column, c("tl.brl.boxnumber","tl.bsl.boxnumber")])
       }
       # FIXME this is a bottleneck
-      warning(paste("column=",column,"; trendline=",trendline))
       # decide on plot
       if (mymin<=mybox & mybox<=mymax) {
         cat(status)
