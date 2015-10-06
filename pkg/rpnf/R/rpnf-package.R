@@ -1,11 +1,11 @@
-#' The R Point and Figure Library is a tool set to create 
+#' The R Point and Figure Package is a tool set to create 
 #' and analyze Point & Figure Charts for given time series 
 #' or data frame objects.
 #' 
 #' \tabular{ll}{
 #' Package: \tab rpnf\cr
 #' Type: \tab Package\cr
-#' Version: \tab 1.0.2\cr
+#' Version: \tab 1.0.3\cr
 #' Date: \tab 2015-10-05\cr
 #' License: \tab GPL-3\cr
 #' }
@@ -14,7 +14,7 @@
 #' @aliases rpnf-package
 #' @aliases rpnf
 #' @docType package
-#' @title R Point and Figure Library
+#' @title R Point and Figure Package
 #' @author Sascha M. Herrmann \email{sascha.martin.herrmann@@gmail.com}
 #' @references Project Home Page \url{http://rpnf.r-forge.r-project.org}
 #' @references Dorsey, Thomas J. Point and Figure Charting: The Essential Application for Forecasting and Tracking Market Prices. 3rd ed. Wiley Trading. Hoboken, N.J: John Wiley & Sons, 2007.
@@ -25,8 +25,8 @@
 #' @seealso \code{\link{pnfplottxt}}
 #' @examples
 #' \dontrun{
-#' ### Initialize library
-#' library(rpnf) # Load rpnf library
+#' ### Initialize package
+#' library(rpnf) # Load rpnf package
 #' data(GDAXI) # Load some example data
 #' #View(GDAXI) # here highs and lows of german DAX30 stock index for 3-years
 #' 
