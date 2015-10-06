@@ -9,6 +9,7 @@
 #' @seealso \code{\link{pnfplottxt}}
 #' @references \url{http://rpnf.r-forge.r-project.org}
 #' @export
+#' @importFrom graphics axis.Date lines plot points
 #' @examples
 #' \dontrun{
 #' library(rpnf) # Load rpnf library

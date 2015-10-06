@@ -3,13 +3,14 @@
 * Rforge log files
 
 ## R CMD check results
-There were no ERRORs or WARNINGs or NOTEs. 
+There were no ERRORs or WARNINGs.
 
-There was 1 NOTE:
-  
-  * checking dependencies in R code ... NOTE
-Namespace in Imports field not imported from: 'R6'
+There is 1 NOTE:
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Sascha Herrmann <sascha.herrmann.consulting@gmail.com>’
+New submission
 
+This should be fine, since I am going to use this new email address to handle all incoming requests for this package.
 
 ## Downstream dependencies
 
