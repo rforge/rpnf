@@ -1,16 +1,16 @@
 ## Test environments
-* Ubuntu 14.04, R 3.1.2
-* Rforge log files
+* rocker/r-devel container, Ubuntu 14.04, R 3.2.2
+* win-builder.r-project.org 
 
 ## R CMD check results
-There were no ERRORs or WARNINGs.
+There were no ERRORs or WARNINGs or NOTEs.
 
-There is 1 NOTE:
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: ‘Sascha Herrmann <sascha.herrmann.consulting@gmail.com>’
-New submission
+## Feedback from last submission
 
-This should be fine, since I am going to use this new email address to handle all incoming requests for this package.
+Feedback from last submission has been considered:
+* Consider adding importFrom("graphics", "axis.Date", "lines", "plot", "points") is DONE.
+* pls remove the redundant The R Point & Figure Library is DONE.
+* this is a package and not a library, so pls change the title etc accordingly is DONE.
 
 ## Downstream dependencies
 
