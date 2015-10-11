@@ -1,21 +1,11 @@
-#' The R Point and Figure Package is a tool set to create 
-#' and analyze Point & Figure Charts for given time series 
-#' or data frame objects.
-#' 
-#' \tabular{ll}{
-#' Package: \tab rpnf\cr
-#' Type: \tab Package\cr
-#' Version: \tab 1.0.3\cr
-#' Date: \tab 2015-10-05\cr
-#' License: \tab GPL-3\cr
-#' }
+#' rpnf is a tool set to create and analyze Point & Figure Charts for given time series or data frame objects.
 #' 
 #' @name rpnf-package
 #' @aliases rpnf-package
 #' @aliases rpnf
 #' @docType package
-#' @title R Point and Figure Package
-#' @author Sascha M. Herrmann \email{sascha.martin.herrmann@@gmail.com}
+#' @title rpnf - The R Point & Figure Package
+#' @author Sascha Herrmann \email{sascha.herrmann.consulting@@gmail.com}
 #' @references Project Home Page \url{http://rpnf.r-forge.r-project.org}
 #' @references Dorsey, Thomas J. Point and Figure Charting: The Essential Application for Forecasting and Tracking Market Prices. 3rd ed. Wiley Trading. Hoboken, N.J: John Wiley & Sons, 2007.
 #' @references German version, which is the base for the package: Dorsey, Thomas. Sicher anlegen mit point & figure: klare Signale mit einfachen Methoden. Munich: FinanzBuch-Verl., 2000.
@@ -24,33 +14,26 @@
 #' @seealso \code{\link{pnfplot}}
 #' @seealso \code{\link{pnfplottxt}}
 #' @examples
-#' \dontrun{
-#' ### Initialize package
-#' library(rpnf) # Load rpnf package
-#' data(GDAXI) # Load some example data
-#' #View(GDAXI) # here highs and lows of german DAX30 stock index for 3-years
-#' 
-#' ### First example: linear analysis
-#' # Determine point and figure informations 
-#' # for a linear chart with boxsize 100 points
-#' symbol.pnf <- pnfprocessor(
-#'   high=GDAXI$High,
-#'   low=GDAXI$Low,
-#'   date=GDAXI$Date,
-#'   boxsize=100L,
+#' # Load rpnf library
+#' library(rpnf) 
+#' # Load free available sample data 
+#' data(DOW) 
+#' # Determine point and figure informations for a linear chart with boxsize of 1 point
+#' pnfdata <- pnfprocessor(
+#'   high=DOW$High,
+#'   low=DOW$Low,
+#'   date=DOW$Date,
+#'   boxsize=1L,
 #'   log=FALSE)  
-#' 
-#' # Result of the pnfprocessor is a data table, 
-#' # which can be viewed and exported easily.
-#' tail(symbol.pnf)
-#' #View(symbol.pnf)
-#' 
-#' # Moreover it can be plotted in a modern style (still very alpha, traditional style planned)
-#' pnfplot(symbol.pnf,main="P&F Plot GDAXI (linear)")
-#' # Or in the old TXT style
-#' pnfplottxt(symbol.pnf,boxsize=100L,log=FALSE,main="P&F Plot GDAXI (linear)")
-#' 
-#' 
+#' # Show the object obtained
+#' str(pnfdata)
+#' # Show the data obtained
+#' pnfdata
+#' # Create a TXT based plot with X and O's
+#' pnfplottxt(pnfdata,boxsize=1L,log=FALSE)
+#' # Create a more graphical plot 
+#' pnfplot(pnfdata)
+#' \dontrun{
 #' ### Second example: logarithmc example
 #' # For most stocks and indices it is useful
 #' # to do the analysis on a logarithmic scale.
@@ -59,9 +42,9 @@
 #' # for an appropriate boxsize of a logarithmic chart.
 #' # Determine point and figure informations for a logarithmic chart with boxsize 2\% 
 #' symbol.pnf <- pnfprocessor(
-#'   high=GDAXI$High,
-#'   low=GDAXI$Low,
-#'   date=GDAXI$Date,
+#'   high=DOW$High,
+#'   low=DOW$Low,
+#'   date=DOW$Date,
 #'   boxsize=getLogBoxsize(2),
 #'   log=TRUE)  
 #' 
@@ -70,9 +53,9 @@
 #' #View(symbol.pnf)
 #' 
 #' # or plot it as a modern chart
-#' pnfplot(symbol.pnf,main="P&F Plot GDAXI (log)")
+#' pnfplot(symbol.pnf,main="P&F Plot DOW (log)")
 #' # Or in the old traditional TXT style
-#' pnfplottxt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (log)")
+#' pnfplottxt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot DOW (log)")
 #' 
 #' ### Additional examples
 #' # Examples for additional uses cases like
@@ -80,6 +63,23 @@
 #' # - bullish percent of an index
 #' # - and many others 
 #' # can be found in your local package library directory.
-#' # Search for rpnf-example1.R, rpnf-example2.R and rpnf-example3.R.
+#' # Search for rpnf-example1.R, rpnf-example2.R and so on.
 #' }
 NULL
+
+#' This is some free available quote data for the DOW Chemical Company.
+#' 
+#'  End of day open, high, low, close and volume, dividends and splits, 
+#'  and split/dividend adjusted open, high, low close and volume for Dow Chemical Company (The) (DOW).  
+#'  Data are freely available at https://www.quandl.com/data/WIKI/DOW,
+#'  and may be copy, distribute, disseminate or include the data in other products for commercial and/or noncommercial purposes. 
+#'  This data is part of Quandl's Wiki initiative to get financial data permanently into the public domain. 
+#'  Quandl relies on users like you to flag errors and provide data where data is wrong or missing. 
+#'  Get involved: connect@@quandl.com 
+#'
+#' @name DOW
+#' @docType data
+#' @author Sascha Herrmann \email{sascha.herrmann.consulting@@gmail.com}
+#' @references \url{https://www.quandl.com/data/WIKI/DOW}
+#' @keywords data
+"DOW"

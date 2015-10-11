@@ -61,19 +61,19 @@ A typical workflow for using **rpnf** consists of three steps:
 
 **rpnf** has some sample data built in:
 ```
-data(GDAXI)   # Load some example data
+data(DOW)   # Load some example data
 ```
-You can have a look at these data with ```str(GDAXI)``` or ```GDAXI```.
+You can have a look at these data with ```str(DOW)``` or ```DOW```.
 
 ### Determining the P&F statistics
 
 To determine the P&F statistics of a time series you use:
 ```
 pnfdata <- pnfprocessor(
-  high=GDAXI$High,
-  low=GDAXI$Low,
-  date=GDAXI$Date,
-  boxsize=100L,
+  high=DOW$High,
+  low=DOW$Low,
+  date=DOW$Date,
+  boxsize=1L,
   log=FALSE)
 ```
 

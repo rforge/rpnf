@@ -21,19 +21,15 @@ pnfplot(data, reversal = 3, boxsize = 1, log = FALSE, ...)
 Generate a modern point and figure plot
 }
 \examples{
-\dontrun{
 library(rpnf) # Load rpnf library
-data(GDAXI) # Load some example data
+data(DOW) # (Offline) Load free available sample data from https://www.quandl.com/data/WIKI/DOW
 pnfdata <- pnfprocessor(
-  high=GDAXI$High,
-  low=GDAXI$Low,
-  date=GDAXI$Date,
-  boxsize=100L,
+  high=DOW$High,
+  low=DOW$Low,
+  date=DOW$Date,
+  boxsize=1L,
   log=FALSE)
-tail(pnfdata)
-pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
-pnfplot(pnfdata)
-}
+pnfplot(pnfdata,boxsize=1L,log=FALSE)
 }
 \references{
 \url{http://rpnf.r-forge.r-project.org}

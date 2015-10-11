@@ -26,12 +26,12 @@ Furthermore it provides already simple Buy/Sell signals, based on checking if th
 }
 \examples{
 library(rpnf) # Load rpnf library
-data(GDAXI) # Load some example data
+data(DOW) # Load some example data
 
 xo.processor(
- high=GDAXI$High,
- low=GDAXI$Low,
- date=GDAXI$Date,
+ high=DOW$High,
+ low=DOW$Low,
+ date=DOW$Date,
  reversal=3L,
  boxsize=1,
  log=TRUE)

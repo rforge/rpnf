@@ -4,7 +4,7 @@
 \alias{pnfprocessor}
 \title{Generate all point and figure informations for a given time series.}
 \usage{
-pnfprocessor(high, low = high, date, reversal = 3L, boxsize = 1,
+pnfprocessor(high, low = high, date, reversal = 3L, boxsize = 1L,
   log = FALSE, style = "xo")
 }
 \arguments{
@@ -29,19 +29,15 @@ returns a data table with all point and figure information in it
 Please ensure that high, low and date are all ordered according to the Date column.
 }
 \examples{
-\dontrun{
 library(rpnf) # Load rpnf library
-data(GDAXI) # Load some example data
+data(DOW) # (Offline) Load free available sample data from https://www.quandl.com/data/WIKI/DOW
 pnfdata <- pnfprocessor(
-  high=GDAXI$High,
-  low=GDAXI$Low,
-  date=GDAXI$Date,
-  boxsize=100L,
+  high=DOW$High,
+  low=DOW$Low,
+  date=DOW$Date,
+  boxsize=1L,
   log=FALSE)
-tail(pnfdata)
-pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
-pnfplot(pnfdata)
-}
+pnfdata
 }
 \references{
 \url{http://rpnf.r-forge.r-project.org}

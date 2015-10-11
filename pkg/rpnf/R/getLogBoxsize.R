@@ -9,15 +9,15 @@
 #' \dontrun{
 #' # apply it with pnfprocessor
 #' library(rpnf) # Load rpnf library
-#' data(GDAXI) # Load some example data
+#' data(DOW) # Load some example data
 #' 
 #' # return appropriate value for 1% boxsize
 #' getLogBoxsize(percent=1)
 #' 
 #' pnfprocessor(
-#'  high=GDAXI$High,
-#'  low=GDAXI$Low,
-#'  date=GDAXI$Date,
+#'  high=DOW$High,
+#'  low=DOW$Low,
+#'  date=DOW$Date,
 #'  boxsize=getLogBoxsize(percent=1),
 #'  log=TRUE)
 #' }

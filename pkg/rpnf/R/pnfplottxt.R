@@ -1,7 +1,7 @@
 #' Generate a classical TXT point and figure plot.
 #' 
-#' THIS FUNCTION IS STILL UNDER HEAVY DEVELOPMENT,
-#' THEREFORE IT IS SUBJECT TO CHANGE!
+#' THIS FUNCTION IS STILL UNDER DEVELOPMENT,
+#' THEREFORE IT MIGHT BE SUBJECT TO CHANGE!
 #' 
 #' @param data a data frame object containing point and figure informations to be plotted
 #' @param reversal number of boxes used in pnfprocessor
@@ -14,19 +14,15 @@
 #' @references \url{http://rpnf.r-forge.r-project.org}
 #' @export
 #' @examples
-#' \dontrun{
 #' library(rpnf) # Load rpnf library
-#' data(GDAXI) # Load some example data
+#' data(DOW) # (Offline) Load free available sample data from https://www.quandl.com/data/WIKI/DOW
 #' pnfdata <- pnfprocessor(
-#'   high=GDAXI$High,
-#'   low=GDAXI$Low,
-#'   date=GDAXI$Date,
-#'   boxsize=100L,
+#'   high=DOW$High,
+#'   low=DOW$Low,
+#'   date=DOW$Date,
+#'   boxsize=1L,
 #'   log=FALSE)  
-#' tail(pnfdata)
-#' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
-#' pnfplot(pnfdata)
-#' }
+#' pnfplottxt(pnfdata,boxsize=1L,log=FALSE)
 pnfplottxt <- function(data,reversal=3,boxsize=1,log=FALSE,main=NULL,sub=NULL) {
   # Check if warning level is set to zero, otherwise output will be messy
   old.waring.level <- getOption("warn")

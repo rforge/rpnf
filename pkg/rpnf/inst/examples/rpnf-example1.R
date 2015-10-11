@@ -2,17 +2,17 @@
 #' 
 ### Initialize library
 library(rpnf) # Load rpnf library
-data(GDAXI) # Load some example data
-#View(GDAXI) # here highs and lows of german DAX30 stock index for 2-years
+data(DOW) # Load some example data
+#View(DOW) 
 
 ### First example: linear analysis
 # Determine point and figure informations 
 # for a linear chart with boxsize 100 points
 symbol.pnf <- pnfprocessor(
-  high=GDAXI$High,
-  low=GDAXI$Low,
-  date=GDAXI$Date,
-  boxsize=100,
+  high=DOW$High,
+  low=DOW$Low,
+  date=DOW$Date,
+  boxsize=1,
   log=FALSE)  
 
 # Result of the pnfprocessor is a data table, 
@@ -21,8 +21,8 @@ tail(symbol.pnf)
 #View(symbol.pnf)
 
 # Moreover it can be plotted in a modern style (still very alpha, traditional style planned)
-pnfplot(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
-pnfplottxt(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
+pnfplot(symbol.pnf,boxsize=1,log=FALSE,main="P&F Plot DOW (linear)")
+pnfplottxt(symbol.pnf,boxsize=1,log=FALSE,main="P&F Plot DOW (linear)")
 
 ### Second example: logarithmc example
 # For most stocks and indices it is useful
@@ -32,9 +32,9 @@ pnfplottxt(symbol.pnf,boxsize=100,log=FALSE,main="P&F Plot GDAXI (linear)")
 # for an appropriate boxsize of a logarithmic chart.
 # Determine point and figure informations for a logarithmic chart with boxsize 1% 
 symbol.pnf <- pnfprocessor(
-  high=GDAXI$High,
-  low=GDAXI$Low,
-  date=GDAXI$Date,
+  high=DOW$High,
+  low=DOW$Low,
+  date=DOW$Date,
   boxsize=getLogBoxsize(2),
   log=TRUE)  
 
@@ -43,8 +43,8 @@ tail(symbol.pnf)
 #View(symbol.pnf)
 
 # or plot it as a chart
-pnfplot(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (log)")
-pnfplottxt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot GDAXI (log)")
+pnfplot(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot DOW (log)")
+pnfplottxt(symbol.pnf,boxsize=getLogBoxsize(2),log=TRUE,main="P&F Plot DOW (log)")
 
 ### Additional examples
 # Examples for additional uses cases like

@@ -11,19 +11,15 @@
 #' @export
 #' @importFrom graphics axis.Date lines plot points
 #' @examples
-#' \dontrun{
 #' library(rpnf) # Load rpnf library
-#' data(GDAXI) # Load some example data
+#' data(DOW) # (Offline) Load free available sample data from https://www.quandl.com/data/WIKI/DOW
 #' pnfdata <- pnfprocessor(
-#'   high=GDAXI$High,
-#'   low=GDAXI$Low,
-#'   date=GDAXI$Date,
-#'   boxsize=100L,
+#'   high=DOW$High,
+#'   low=DOW$Low,
+#'   date=DOW$Date,
+#'   boxsize=1L,
 #'   log=FALSE)  
-#' tail(pnfdata)
-#' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
-#' pnfplot(pnfdata)
-#' }
+#' pnfplot(pnfdata,boxsize=1L,log=FALSE)
 pnfplot <- function(data,reversal=3,boxsize=1,log=FALSE,...) {
   if (length(intersect(names(data),c("date","nextO","nextX","status.xo","status.bs","high","low")))!=7)
     stop(paste("input data frame must contain columns ",c("date","nextO","nextX","status.xo","status.bs","high","low"),"!"))

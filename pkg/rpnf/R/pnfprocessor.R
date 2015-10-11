@@ -15,25 +15,21 @@
 #' @seealso \code{\link{pnfplottxt}}
 #' @references \url{http://rpnf.r-forge.r-project.org}
 #' @examples
-#' \dontrun{
 #' library(rpnf) # Load rpnf library
-#' data(GDAXI) # Load some example data
+#' data(DOW) # (Offline) Load free available sample data from https://www.quandl.com/data/WIKI/DOW
 #' pnfdata <- pnfprocessor(
-#'   high=GDAXI$High,
-#'   low=GDAXI$Low,
-#'   date=GDAXI$Date,
-#'   boxsize=100L,
+#'   high=DOW$High,
+#'   low=DOW$Low,
+#'   date=DOW$Date,
+#'   boxsize=1L,
 #'   log=FALSE)  
-#' tail(pnfdata)
-#' pnfplottxt(pnfdata,boxsize=100L,log=FALSE)
-#' pnfplot(pnfdata)
-#' }
+#' pnfdata
 pnfprocessor <- function(
   high,
   low=high,
   date,
   reversal=3L, 
-  boxsize=1, 
+  boxsize=1L, 
   log=FALSE,
   style="xo") {
   # check for proper style selection

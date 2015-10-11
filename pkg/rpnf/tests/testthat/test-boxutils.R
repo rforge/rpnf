@@ -170,12 +170,12 @@ test_that(desc="Test, if xo.processor() throws errors/warnings on wrong argument
 
 # test_that(desc="Test, if speed of xo.processor() is sufficent",
 # {
-#   data(GDAXI)
-#   times <- system.time(xo.processor(high=GDAXI$High, low=GDAXI$Low,date=GDAXI$Date))
+#   data(DOW)
+#   times <- system.time(xo.processor(high=DOW$High, low=DOW$Low,date=DOW$Date))
 #   warning(paste0("Timings of xo.processor() for linear charts: ",times[1]," sec."))
 #   expect_less_than(object=times[1],expected=0.15)
 #   
-#   times <- system.time(xo.processor(high=GDAXI$High, low=GDAXI$Low,date=GDAXI$Date,boxsize=getLogBoxsize(1),log=T))
+#   times <- system.time(xo.processor(high=DOW$High, low=DOW$Low,date=DOW$Date,boxsize=getLogBoxsize(1),log=T))
 #   warning(paste0("Timings of xo.processor() for logarithmic charts: ",times[1]," sec."))
 #   expect_less_than(object=times[1],expected=0.15)
 # })
@@ -205,7 +205,7 @@ test_that(desc="Test, if xo.processor() throws errors/warnings on wrong argument
 
 test_that(desc="Test, if xo.processor() produces correct output",
 {
-  data(GDAXI)
+  data(DOW)
   load(file="boxutils-example1.RData") # this loads an object result
-  expect_equivalent(object=xo.processor(high=GDAXI$High,low=GDAXI$Low,date=GDAXI$Date),expected=result)
+  expect_equivalent(object=xo.processor(high=DOW$High,low=DOW$Low,date=DOW$Date),expected=result)
 })
