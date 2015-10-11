@@ -77,9 +77,9 @@ NULL
 #'  Quandl relies on users like you to flag errors and provide data where data is wrong or missing. 
 #'  Get involved: connect@@quandl.com 
 #'
-#' @name DOW
+#' @name data-DOW
 #' @docType data
 #' @author Sascha Herrmann \email{sascha.herrmann.consulting@@gmail.com}
 #' @references \url{https://www.quandl.com/data/WIKI/DOW}
 #' @keywords data
-"DOW"
+NULL
