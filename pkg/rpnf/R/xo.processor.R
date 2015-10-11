@@ -8,19 +8,7 @@
 #' @param reversal
 #' @param boxsize A single numeric value, indicating the boxsize to be considered.
 #' @param log TRUE, if logarithmic scales should be used.
-#' @export
 #' @keywords internal
-#' @examples
-#' library(rpnf) # Load rpnf library
-#' data(DOW) # Load some example data
-#' 
-#' xo.processor(
-#'  high=DOW$High,
-#'  low=DOW$Low,
-#'  date=DOW$Date,
-#'  reversal=3L,
-#'  boxsize=1,
-#'  log=TRUE)
 xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE) {
   if (!(is.numeric(high) & length(high)>=1)) {
     stop("Argument high has to be numeric and at least of length 1!")

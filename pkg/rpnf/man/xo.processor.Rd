@@ -24,17 +24,5 @@ xo.processor(high, low = high, date, reversal = 3L, boxsize = 1,
 This is the main PNF-Workhorse, which transforms a given time series into X and O's.
 Furthermore it provides already simple Buy/Sell signals, based on checking if the second last colum.
 }
-\examples{
-library(rpnf) # Load rpnf library
-data(DOW) # Load some example data
-
-xo.processor(
- high=DOW$High,
- low=DOW$Low,
- date=DOW$Date,
- reversal=3L,
- boxsize=1,
- log=TRUE)
-}
 \keyword{internal}
 

@@ -16,7 +16,6 @@ a numeric value which is equivalent to the percental change given on a logarithm
 This function returns an appropriate boxsize if you want to do your point and figure analysis with an logarithmic scale.
 }
 \examples{
-\dontrun{
 # apply it with pnfprocessor
 library(rpnf) # Load rpnf library
 data(DOW) # Load some example data
@@ -30,6 +29,5 @@ pnfprocessor(
  date=DOW$Date,
  boxsize=getLogBoxsize(percent=1),
  log=TRUE)
-}
 }
 
