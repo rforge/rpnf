@@ -156,7 +156,7 @@ pnfplot(
 
 If you need commerical support feel free to contact Sascha Herrmann <sascha.herrmann.consulting@gmail.com> for an offer. You can also request a new feature development there.
 
-For non-commerical support please refer to the r-forge forums.
+For non-commerical support please refer to the [r-forge project page](http://r-forge.r-project.org/projects/rpnf/) and some online communities like [stackoverflow](http://stackoverflow.com/).
 
 # Development roadmap
 
