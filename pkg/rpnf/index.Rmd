@@ -1,13 +1,45 @@
 ---
 title: "rpnf"
 author: "Sascha Herrmann <sascha.herrmann.consulting@gmail.com>"
-date: "October 6, 2015"
+date: "October 13, 2015"
 output: html_document
 ---
 
 # Purpose of **rpnf**
 
 **rpnf** is a collection of R functions for creating Point & Figure (P&F) charts and statistics for a given time series.
+
+
+    --------+---------------------------
+       53.00|    X         X X              
+       52.00|    XO        XOXO+            
+       51.00|    XO        XOXO +           
+       50.00|X+X XOX     X XOXO  +          
+       49.00| OXOXOXO+   XOXO O   +         
+       48.00| OXOXOXO +  XOX  O    +   X <==
+       47.00| OXOXO O  + XOX  OX    +  X    
+       46.00| OXO   OX  +XOX +OXO    + X    
+       45.00| OX   +OXOX XO + OXO    X+X    
+       44.00| OX  + OXOXOX +  O O  X XOX    
+       43.00| OX +  OXOXOX+     OX XOXOX    
+       42.00| OX+   O OXO       OXOXOXOX    
+       41.00| O       O         OXOXO OX    
+       40.00|                   OXOX  OX    
+       39.00|                   OXO   O     
+       38.00|                   OX          
+       37.00|                   OX          
+       36.00|                   OX          
+       35.00|                   O           
+    --------+---------------------------
+           Y|111111111111111111111111111
+           Y|444444444555555555555555555
+            |                           
+           M|111111111000000000000000000
+           M|000001222111133677788889999
+            |                           
+           D|011232001012202211212220023
+           D|906316598558967947925671830
+
 
 # Features of **rpnf**
 
@@ -47,7 +79,7 @@ install.packages("rpnf", repos="http://R-Forge.R-project.org")
 
 Once **rpnf** is installed you can start using it by loading the library:
 
-```
+```{R}
 library(rpnf) # Load rpnf library
 ```
 
@@ -60,7 +92,7 @@ A typical workflow for using **rpnf** consists of three steps:
 ### Getting some data
 
 **rpnf** has some sample data built in:
-```
+```{R}
 data(DOW)   # Load some example data
 ```
 You can have a look at these data with ```str(DOW)``` or ```DOW```.
@@ -68,7 +100,7 @@ You can have a look at these data with ```str(DOW)``` or ```DOW```.
 ### Determining the P&F statistics
 
 To determine the P&F statistics of a time series you use:
-```
+```{R}
 pnfdata <- pnfprocessor(
   high=DOW$High,
   low=DOW$Low,
@@ -78,7 +110,46 @@ pnfdata <- pnfprocessor(
 ```
 
 ### Understanding the P&F statistics
+
+The data.frame returned by ```pnfprocessor(...)``` is full of P&F statistics on the given time series. Every row consists of one observation on the time series, whereas columns have the following meaning:
+
+* date      : the date of the observation in the time series
+* high      : the high values of the time series at observation date
+* low       : the low values of the time series at observation date
+* boxnumber : boxnumber (integer) of the current chart status 
+* column    : current column (integer) in the P&F chart
+* status.xo : factor containing the current X or O status
+* nextX     : threshold to reach in order to make an X. If latest status.xo is an O, then this is the reversal point.
+* nextO     : threshold to reach in order to make an O. If latest status.xo is an X, then this is the reversal point.
+* status.bs : factor containing the current Buy/Sell status of this observation
+* lastNextX : highest value of the previous X-column. Used for Buy/Sell detection.
+* lastNextO : lowest value of the previous O-column. Used for Buy/Sell detection.
+* signal.bs : current P&F buy or sell signal, such as Double Top, etc.
+
+This data.frame can be used either to do some statistical analysis,
+or it can be used to generate plots.
+
 ### Generating P&F plots
+
+Generating plots from a pnf data.frame can be achieved by:
+
+```{R}
+pnfplottxt(
+  data = pnfdata,
+  reversal = 3,
+  boxsize = 1L,
+  log = F)
+```
+
+Alternatively you can plot a graphical chart with:
+
+```{R}
+pnfplot(
+  data = pnfdata,
+  reversal = 3,
+  boxsize = 1L,
+  log = F)
+```
 
 
 # Support

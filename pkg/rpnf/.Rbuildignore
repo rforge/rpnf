@@ -4,4 +4,5 @@
 ^pkg$
 ^.Rhistory$
 ^cran-comments.md$
-^index.md$
+^index.Rmd$
+^index.html$
