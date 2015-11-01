@@ -1,4 +1,13 @@
-getSymbolsForIndexSymbols <- function(indexSymbols="GDAXI",stockMarketIdentifier=".DE") {
+#' Downloads symbols for given Yahoo index symbol by scraping the composite page. 
+#'
+#' @param indexSymbols Character vector of yahoo index symbols (only 1 supported currently)
+#' @param stockMarketIdentifier Appendix to identify the stock market, e.g. '.DE' for german XETERA
+#'
+#' @return Vector of yahoo symbols for usage in quantmod.
+#' @export
+#' @import httr
+#' @import stringr
+getSymbolsForIndexSymbols <- function(indexSymbols=c("GDAXI"),stockMarketIdentifier=".DE") {
   if (!is.character(indexSymbols)) {
     stop("Parameter indexSymbols has to be character!")
   }
@@ -15,7 +24,6 @@ getSymbolsForIndexSymbols <- function(indexSymbols="GDAXI",stockMarketIdentifier
   # extract content
   content <- httr::content(retrieved,"text")
   # extract symbols from content
-  #pattern <- "<b><a href=\"/q\\?s=ADS.DE\">(ADS\.DE)</a></b>"
   pattern1 <- paste0("<b><a href=\"/q\\?s=[A-Z0-9]+\\",stockMarketIdentifier,"\">([A-Z0-9]+\\.DE)</a></b>")
   extract1 <- stringr::str_extract_all(string=content,pattern=pattern1)
   pattern2 <- paste0(">([A-Z0-9]+\\",stockMarketIdentifier,")</a></b>")
