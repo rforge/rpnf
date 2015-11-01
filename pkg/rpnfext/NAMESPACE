@@ -2,4 +2,6 @@
 
 export(getSymbolsForIndexSymbols)
 export(pnfprocessor.xts)
+import(httr)
+import(stringr)
 import(xts)

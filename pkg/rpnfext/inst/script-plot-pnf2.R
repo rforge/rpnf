@@ -5,12 +5,12 @@ library(rpnfext)
 args <- commandArgs(trailingOnly = TRUE)
 if (length(args)<1) {
   print("No commandline args given! Going for default GDAXI")
-  args <- c("GDAXI",".DE")
+  args <- c("GDAXI","MDAXI","SDAXI",".DE")
 }
 
 pnflist <- list()
 
-print(paste0("Processing commandline indexSymbol = ",args[1:(length(args)-1)]))  
+print(paste0("Processing commandline indexSymbol = ",args[1:(length(args)-1)],sep = ", "))  
 
 # Read a yahoo symbols list for given index string
 symbols <- rpnfext::getSymbolsForIndexSymbols(indexSymbols=args[1:(length(args)-1)],stockMarketIdentifier=args[length(args)])
@@ -18,7 +18,11 @@ symbols <- rpnfext::getSymbolsForIndexSymbols(indexSymbols=args[1:(length(args)-
 for (symbol in symbols) {
   print(paste0("--Processing ",symbol))
   # get quotes from yahoo
-  quotes <- quantmod::getSymbols(Symbols=symbol,auto.assign=F)
+  quotes <- try(expr = quantmod::getSymbols(Symbols=symbol,auto.assign=F))
+  if (!is.xts(quotes)) {
+    warning("Warning: failed to download quotes for ",symbol)
+    next
+  }
   # determine PNF statistics
   pnfdata <- rpnf::pnfprocessor(high=quotes[,2],
                                 low=quotes[,3],
@@ -51,7 +55,7 @@ pnfdata <- as.data.frame(data.table::rbindlist(pnflist))
 dplyr::count(pnfdata,date)
 plot(dplyr::count(pnfdata,date))
 counter <- dplyr::count(pnfdata,date)
-datesToRemove <- counter[ counter[,2] < mean(unlist(dplyr::count(pnfdata,date)[,2])) - 3*sd(unlist(dplyr::count(pnfdata,date)[,2])), 1]
+datesToRemove <- counter[ counter[,2] < (mean(unlist(dplyr::count(pnfdata,date)[,2])) - 3*sd(unlist(dplyr::count(pnfdata,date)[,2]))), 1]
 pnfdata <- pnfdata[ !pnfdata$date %in% datesToRemove$date, ]
 plot(dplyr::count(pnfdata,date))
 
@@ -90,4 +94,4 @@ sink(file=filename,type=c("output"),split=F)
 rpnf::pnfplottxt(bullishPercent[bullishPercent$column>=max(bullishPercent$column)-80,],reversal=3L,boxsize=0.02,log=F)
 sink()
 
-
+save.image(file = "finished.RData")

@@ -2,7 +2,7 @@ Package: rpnfext
 Type: Package
 Title: Extentions of the R Point and Figure Library rpnf
 Version: 0.0.1
-Date: 2014-05-06
+Date: 2015-11-01
 Author: Sascha M. Herrmann
 Maintainer: <Sascha.Martin.Herrmann@gmail.com>
 Description: This package contains extentions, wrappers and evaluation function around the rpnf package. It's main intention is to keep rpnf lean and without almost any dependency.
