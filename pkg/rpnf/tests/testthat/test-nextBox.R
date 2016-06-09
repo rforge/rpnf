@@ -20,7 +20,7 @@ testthat::test_that(desc="Test, if nextBox() returns results of same length as i
                       testthat::expect_equivalent(object=length(nextBox(quote=input,status="O")),expected=length)
                     })
 
-testthat::test_that(desc="Test, if nextBox() produces appropriate return values for boxsize=1 and status=X",
+testthat::test_that(desc="Test, if nextBox() produces appropriate return values for boxsize=1 and status=X and log=F",
                     {
                       testthat::expect_equal(object=nextBox(quote=46.00,status="X",boxsize=1L,log=F),expected=47.00)
                       testthat::expect_equal(object=nextBox(quote=46.01,status="X",boxsize=1L,log=F),expected=47.00)
@@ -36,7 +36,7 @@ testthat::test_that(desc="Test, if nextBox() produces appropriate return values 
                       testthat::expect_equal(object=nextBox(quote=47.00,status="X",boxsize=0.5,log=F),expected=47.50)
                     })
 
-testthat::test_that(desc="Test, if nextBox() produces appropriate return values for boxsize=1 and status=O",
+testthat::test_that(desc="Test, if nextBox() produces appropriate return values for boxsize=1 and status=O and log=F",
                     {
                       testthat::expect_equal(object=nextBox(quote=46.00,status="O",boxsize=1L,log=F),expected=45.00)
                       testthat::expect_equal(object=nextBox(quote=46.01,status="O",boxsize=1L,log=F),expected=46.00)
@@ -52,4 +52,43 @@ testthat::test_that(desc="Test, if nextBox() produces appropriate return values 
                       testthat::expect_equal(object=nextBox(quote=47.00,status="O",boxsize=0.5,log=F),expected=46.50)
                     })
 
+calcQuoteFromBoxnumberForLog <- function(boxnumber, eps, boxsize) {
+  exp((boxnumber+eps)*boxsize)
+}
+
+testthat::test_that(desc="Test, if nextBox() produces appropriate return values for boxsize=1% and status=X and log=T",
+                    {
+                      boxsize=getLogBoxsize(1)
+                      boxnumber=385
+                      testthat::expect_equal(object=nextBox(quote=calcQuoteFromBoxnumberForLog(boxnumber,0.00, boxsize),
+                                                            status="X",boxsize=boxsize,log=T),
+                                             expected=calcQuoteFromBoxnumberForLog(boxnumber,1.0, boxsize))
+                      testthat::expect_equal(object=nextBox(quote=calcQuoteFromBoxnumberForLog(boxnumber,0.01, boxsize),
+                                                            status="X",boxsize=boxsize,log=T),
+                                             expected=calcQuoteFromBoxnumberForLog(boxnumber,1.0, boxsize))
+                      testthat::expect_equal(object=nextBox(quote=calcQuoteFromBoxnumberForLog(boxnumber,0.99, boxsize),
+                                                            status="X",boxsize=boxsize,log=T),
+                                             expected=calcQuoteFromBoxnumberForLog(boxnumber,1.0, boxsize))
+                      testthat::expect_equal(object=nextBox(quote=calcQuoteFromBoxnumberForLog(boxnumber,1.00, boxsize),
+                                                            status="X",boxsize=boxsize,log=T),
+                                             expected=calcQuoteFromBoxnumberForLog(boxnumber,2.0, boxsize))
+                    })
+
+testthat::test_that(desc="Test, if nextBox() produces appropriate return values for boxsize=1% and status=O and log=T",
+                    {
+                      boxsize=getLogBoxsize(1)
+                      boxnumber=385
+                      testthat::expect_equal(object=nextBox(quote=calcQuoteFromBoxnumberForLog(boxnumber,0.00, boxsize),
+                                                            status="O",boxsize=boxsize,log=T),
+                                             expected=calcQuoteFromBoxnumberForLog(boxnumber,-1.0, boxsize))
+                      testthat::expect_equal(object=nextBox(quote=calcQuoteFromBoxnumberForLog(boxnumber,0.01, boxsize),
+                                                            status="O",boxsize=boxsize,log=T),
+                                             expected=calcQuoteFromBoxnumberForLog(boxnumber,0.0, boxsize))
+                      testthat::expect_equal(object=nextBox(quote=calcQuoteFromBoxnumberForLog(boxnumber,0.99, boxsize),
+                                                            status="O",boxsize=boxsize,log=T),
+                                             expected=calcQuoteFromBoxnumberForLog(boxnumber,0.0, boxsize))
+                      testthat::expect_equal(object=nextBox(quote=calcQuoteFromBoxnumberForLog(boxnumber,1.00, boxsize),
+                                                            status="O",boxsize=boxsize,log=T),
+                                             expected=calcQuoteFromBoxnumberForLog(boxnumber,0.0, boxsize))
+                    })
 

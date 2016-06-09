@@ -3,6 +3,7 @@
 #' @param boxsize single numeric value, used as the boxsize
 #' @param log TRUE, if logarithmic scales should be used
 box2upper <- function(boxnumber, boxsize=1, log=FALSE) {
+  warning("Function box2upper() is deprecated and should be replaced by boxnumber2upperBound()!")
   # FIXME improve sanity checks
   if(sum(floor(boxnumber)!=boxnumber,na.rm=T)>0)
     stop("Error: Only integer values allowed as boxnumber!")
