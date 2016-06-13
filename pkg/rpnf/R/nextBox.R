@@ -26,14 +26,5 @@ nextBox <- function(quote,status, boxsize=1, log=FALSE) {
   } else {
     stop(paste0("Unknown X/O-status ",status,"observed!"))
   }
-  
-  # OLD CODE
-  # if (status == "X") {
-  #   boxnumber2lowerBound(quote2boxnumber(quote=quote,,status = status, boxsize=boxsize,log=log)+1,boxsize=boxsize,log=log)
-  # } else if (status == "O") {
-  #   boxnumber2upperBound(quote2box(quote=quote,boxsize=boxsize,log=log)-1,boxsize=boxsize,log=log)
-  # } else {
-  #   stop(paste0("Unknown X/O-status ",status,"observed!"))
-  # }
 }
 
