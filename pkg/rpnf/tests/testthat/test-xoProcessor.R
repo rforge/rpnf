@@ -50,8 +50,13 @@ testthat::test_that(desc="Test xoProcessor with three quotes",
                       result <- readXoProcessorResultFile("testdata-xoProcessor-tripleQuote-OXX.csv")
                       testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
                                              expected = result)
-                      # OXO - Case
+                      # OXO - Case: Go exactly to reversal threshold
                       result <- readXoProcessorResultFile("testdata-xoProcessor-tripleQuote-OXO.csv")
+                      testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
+                                             expected = result)
+                      
+                      # OXO - Case: Go beyond reversal threshold
+                      result <- readXoProcessorResultFile("testdata-xoProcessor-tripleQuote-OXO_2.csv")
                       testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
                                              expected = result)
                       
@@ -88,8 +93,12 @@ testthat::test_that(desc="Test xoProcessor with four quotes",
                       result <- readXoProcessorResultFile("testdata-xoProcessor-quadrupleQuote-OXO_.csv")
                       testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
                                              expected = result)
-                      # OXOX - Case
+                      # OXOX - Case: Go exactly to threshold
                       result <- readXoProcessorResultFile("testdata-xoProcessor-quadrupleQuote-OXOX.csv")
+                      testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
+                                             expected = result)
+                      # OXOX - Case: Go beyond threshold
+                      result <- readXoProcessorResultFile("testdata-xoProcessor-quadrupleQuote-OXOX_2.csv")
                       testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
                                              expected = result)
                       # OXOO - Case
@@ -113,6 +122,15 @@ testthat::test_that(desc="Test xoProcessor with five quotes",
                       testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
                                              expected = result)
                     })
+
+# Test case identified by comparing http://stockcharts.com/freecharts/pnf.php?c=PG,PWTADANRNO[PA][D][F1!3!!!2!20]# with my result
+testthat::test_that(desc="Test for corect boxnumber calculation after reversal from X on PG at 2016-04-22",
+                    {
+                      result <- readXoProcessorResultFile("testdata-xoProcessor-PG-20160422.csv")
+                      testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
+                                             expected = result)
+                    })
+
 
 
 

@@ -90,7 +90,7 @@ xo.processor <- function(high,low=high, date, reversal=3L, boxsize=1, log=FALSE)
         } else if (low[i] <= nextO[i-1]) {
           # we made a reversal to O
           status.xo[i] <- "O"
-          boxnumber[i] = quoteToBoxnumber(quote=low[i], status=status.xo[i-1], boxsize=boxsize,log=log)
+          boxnumber[i] = quoteToBoxnumber(quote=low[i], status=status.xo[i], boxsize=boxsize,log=log)
           nextX[i] <- nextReversal(low[i],status.xo[i],reversal=reversal,boxsize=boxsize,log=log)
           lastNextX[i] <- nextX[i-1]
           nextO[i] <- nextBox(low[i],status.xo[i], boxsize=boxsize,log=log)
