@@ -123,16 +123,6 @@ testthat::test_that(desc="Test xoProcessor with five quotes",
                                              expected = result)
                     })
 
-# Test case identified by comparing http://stockcharts.com/freecharts/pnf.php?c=PG,PWTADANRNO[PA][D][F1!3!!!2!20]# with my result
-testthat::test_that(desc="Test for corect boxnumber calculation after reversal from X on PG at 2016-04-22",
-                    {
-                      result <- readXoProcessorResultFile("testdata-xoProcessor-PG-20160422.csv")
-                      testthat::expect_equal(object = xo.processor(result$high,result$low,result$date),
-                                             expected = result)
-                    })
-
-
-
 
 # test_that(desc="Test, if speed of xo.processor() is sufficent",
 # {

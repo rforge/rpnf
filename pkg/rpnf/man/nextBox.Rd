@@ -4,7 +4,7 @@
 \alias{nextBox}
 \title{Determine the next box frontier for current quote(s) given a recent XO-status.}
 \usage{
-nextBox(quote, status, boxsize = 1, log = FALSE, offset = 0)
+nextBox(quote, status, boxsize = 1, log = FALSE)
 }
 \arguments{
 \item{quote}{A single quote or a vector of quotes.}
@@ -14,8 +14,6 @@ nextBox(quote, status, boxsize = 1, log = FALSE, offset = 0)
 \item{boxsize}{A single numeric value, indicating the boxsize to be considered.}
 
 \item{log}{TRUE, if logarithmic scales should be used.}
-
-\item{offset}{A numeric value}
 }
 \description{
 Note: offset should only be used for reversal calculation
