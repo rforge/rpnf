@@ -2,10 +2,10 @@
 #' 
 #' This is the main PNF-Workhorse, which transforms a given time series into X and O's.
 #' Furthermore it provides already simple Buy/Sell signals, based on checking if the second last colum.
-#' @param high
-#' @param low
-#' @param date
-#' @param reversal
+#' @param high Vector of high quotes
+#' @param low Vector of low quotes. If skipped, high are taken as low.
+#' @param date Vector of dates of the time series.
+#' @param reversal Number of boxes necessary for a reversal
 #' @param boxsize A single numeric value, indicating the boxsize to be considered.
 #' @param log TRUE, if logarithmic scales should be used.
 #' @keywords internal
