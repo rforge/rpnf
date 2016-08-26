@@ -1,6 +1,14 @@
+
+## Changelog
+
+* Fixed a bug in the calculation of
+  boxes.
+* Improved examples and documentation of
+  exported functions.
+
 ## Test environments
 
-* starfox/r-devel docker container, Ubuntu 14.04, R 3.2.2 (r-devel)
+* starfox/r-devel docker container, Ubuntu 14.04, R 3.3.1 (r-devel)
 * win-builder.r-project.org
 
 ## R CMD check results
@@ -9,18 +17,14 @@
 * There were no WARNINGs.
 * There were no NOTEs.
 
+## Downstream dependencies
+
+There are currently no downstream dependencies for this package known to me.
+
 ## Feedback from last submission
 
 Feedback from last submission has been considered:
 
-* "Thanks, but the first part of the description is redundant for a package of that name. Better say which kind of plots are actually drawn." => Description in DESCRIPTION has been adapted.
-* "Also, your examples are mostly hidden within dontrun{}, hence not executed, please add proper examples that actually get checked." => Some freely available data have been added, so that examples can be executed without on-line connection and additional packages. All exported functions now have at least one example being executed.
+* "txt" has been changed into "text" (honestly it was written on purpose like that, since it refers to .txt files. But text is fine for me, too)
 
-## Downstream dependencies
 
-There are currently no downstream dependencies for this package, since it will be released to CRAN for the very first time.
-
-## Acknowledgement
-
-Thanks for the useful hints how to improve the package and perfectly align it to CRAN policies. 
-Hopefully I have learned enough to improve my submission quality to an appropriate level.
